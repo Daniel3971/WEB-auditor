@@ -1,1 +1,49 @@
-<p>navbar works!</p>
+<header class="header">
+  <div class="brand">
+    <a routerLink="/">
+      <img
+        src="/logo_Atwi.png"
+        alt="ATWI Audit & Accounting Logo"
+        class="header-logo"
+      >
+    </a>
+  </div>
+
+  <nav class="navbar">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
+    </a>
+
+    <a routerLink="/about" routerLinkActive="active">
+      About Us
+    </a>
+
+    <a routerLink="/services" routerLinkActive="active">
+      Services
+    </a>
+
+    <a routerLink="/locations" routerLinkActive="active">
+      Locations
+    </a>
+
+    <a routerLink="/official-forms" routerLinkActive="active">
+      Official Forms
+    </a>
+
+    <a routerLink="/careers" routerLinkActive="active">
+      Careers
+    </a>
+
+    <a routerLink="/contact" routerLinkActive="active">
+      Contact
+    </a>
+  </nav>
+
+  <button type="button" class="language-button">
+    🌐 EN⌄
+  </button>
+</header>
