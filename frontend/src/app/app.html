@@ -1,22 +1,7 @@
-<h1>ATWI Audit & Accounting</h1>
+<app-navbar></app-navbar>
 
-<h2>Our Services</h2>
+<main>
+  <router-outlet></router-outlet>
+</main>
 
-@if (loading()) {
-  <p>Loading services...</p>
-}
-
-@if (errorMessage()) {
-  <p>{{ errorMessage() }}</p>
-}
-
-@if (!loading() && services().length === 0) {
-  <p>No services are available.</p>
-}
-
-@for (service of services(); track service.id) {
-  <article>
-    <h3>{{ service.title }}</h3>
-    <p>{{ service.description }}</p>
-  </article>
-}
+<app-footer></app-footer>
