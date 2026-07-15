@@ -231,36 +231,6 @@
    STATS
 =========================== */
 
-.stats-section {
-  padding: 24px 6%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  color: #ffffff;
-  background: #12355f;
-}
-
-.stat {
-  min-height: 78px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-right: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.stat:last-child {
-  border-right: none;
-}
-
-.stat strong {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 34px;
-}
-
-.stat span {
-  margin-top: 5px;
-  font-size: 14px;
-}
 
 /* ===========================
    RESPONSIVE
@@ -304,17 +274,5 @@
     height: 280px;
   }
 
-  .services-grid,
-  .stats-section {
-    grid-template-columns: 1fr;
-  }
-
-  .stat {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .stat:last-child {
-    border-bottom: none;
-  }
+ 
 }
