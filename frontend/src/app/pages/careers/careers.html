@@ -1,1 +1,251 @@
-<p>careers works!</p>
+<section class="careers-hero">
+  <div class="careers-hero-content">
+    <p class="eyebrow">CAREERS AT ATWI</p>
+
+    <h1>Build Your Career with Confidence</h1>
+
+    <div class="gold-line"></div>
+
+    <p class="intro">
+      Join a professional environment where you can develop your accounting,
+      audit and business skills while gaining valuable practical experience.
+    </p>
+  </div>
+</section>
+
+<section class="benefits-section">
+  <div class="section-heading">
+    <p>WHY JOIN US</p>
+    <h2>Grow with ATWI</h2>
+    <div class="small-line"></div>
+  </div>
+
+  <div class="benefits-grid">
+    <article class="benefit-card">
+      <div class="benefit-number">01</div>
+      <h3>Professional Experience</h3>
+      <p>
+        Work on real accounting, audit and financial assignments with
+        experienced professionals.
+      </p>
+    </article>
+
+    <article class="benefit-card">
+      <div class="benefit-number">02</div>
+      <h3>Continuous Learning</h3>
+      <p>
+        Improve your technical knowledge and develop practical skills in a
+        professional environment.
+      </p>
+    </article>
+
+    <article class="benefit-card">
+      <div class="benefit-number">03</div>
+      <h3>Career Development</h3>
+      <p>
+        Build a strong foundation for your future career in accounting,
+        auditing, tax or business advisory.
+      </p>
+    </article>
+
+    <article class="benefit-card">
+      <div class="benefit-number">04</div>
+      <h3>Team Collaboration</h3>
+      <p>
+        Learn how to communicate, solve problems and work effectively as part
+        of a professional team.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section class="application-section">
+  <div class="application-information">
+    <p class="eyebrow">INTERNSHIP APPLICATION</p>
+
+    <h2>Start Your Professional Journey</h2>
+
+    <p class="application-description">
+      Complete the form and upload your CV. Our team will review your
+      application and contact you when a suitable opportunity is available.
+    </p>
+
+    <div class="application-notes">
+      <div class="note-item">
+        <span>✓</span>
+        <p>Complete all required fields before submitting your application.</p>
+      </div>
+
+      <div class="note-item">
+        <span>✓</span>
+        <p>Upload a recent CV containing your education and experience.</p>
+      </div>
+
+      <div class="note-item">
+        <span>✓</span>
+        <p>Accepted CV format: PDF. Maximum file size is 5 MB.</p>
+      </div>
+
+      <div class="note-item">
+        <span>✓</span>
+        <p>Submitting an application does not guarantee immediate placement.</p>
+      </div>
+    </div>
+  </div>
+
+  <form class="application-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">
+          First Name <span>*</span>
+        </label>
+
+        <input
+          id="firstName"
+          name="firstName"
+          type="text"
+          placeholder="Enter your first name"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">
+          Last Name <span>*</span>
+        </label>
+
+        <input
+          id="lastName"
+          name="lastName"
+          type="text"
+          placeholder="Enter your last name"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">
+          Email Address <span>*</span>
+        </label>
+
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="name@example.com"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="phone">
+          Phone Number <span>*</span>
+        </label>
+
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          placeholder="+961"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="university">University</label>
+
+        <input
+          id="university"
+          name="university"
+          type="text"
+          placeholder="Enter your university"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="major">Major or Degree</label>
+
+        <input
+          id="major"
+          name="major"
+          type="text"
+          placeholder="Accounting, Finance..."
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cv">
+        Upload CV <span>*</span>
+      </label>
+
+      <div class="file-input">
+        <input
+          #cvInput
+          id="cv"
+          name="cv"
+          type="file"
+          accept=".pdf,application/pdf"
+          required
+          (change)="onFileSelected($event)"
+        >
+
+        @if (selectedFileName()) {
+          <div class="selected-file">
+            <div class="selected-file-information">
+              <strong>Selected file</strong>
+              <p>{{ selectedFileName() }}</p>
+            </div>
+
+            <button
+              type="button"
+              class="remove-file-button"
+              (click)="removeSelectedFile(cvInput)"
+            >
+              Remove
+            </button>
+          </div>
+        }
+
+        <p class="file-help">
+          Choose a PDF file with a maximum size of 5 MB.
+        </p>
+
+        @if (fileError()) {
+          <p class="file-error">
+            {{ fileError() }}
+          </p>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message</label>
+
+      <textarea
+        id="message"
+        name="message"
+        rows="6"
+        placeholder="Tell us briefly about yourself and your career goals."
+      ></textarea>
+    </div>
+
+    <label class="consent">
+      <input type="checkbox" name="consent" required>
+
+      <span>
+        I confirm that the information provided is accurate and I agree that
+        ATWI may review my application details.
+      </span>
+    </label>
+
+    <button type="submit" class="submit-button">
+      Submit Application
+      <span>→</span>
+    </button>
+  </form>
+</section>
