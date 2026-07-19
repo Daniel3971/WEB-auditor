@@ -1,0 +1,315 @@
+{
+  "NAV": {
+    "HOME": "Home",
+    "ABOUT": "About Us",
+    "SERVICES": "Services",
+    "LOCATIONS": "Locations",
+    "OFFICIAL_FORMS": "Official Forms",
+    "CAREERS": "Careers",
+    "CONTACT": "Contact"
+  },
+
+  "HOME": {
+    "HERO": {
+      "TITLE_FIRST": "Your Trusted Partner in",
+      "TITLE_SECOND": "Audit & Accounting",
+      "DESCRIPTION": "We provide high-quality audit, accounting and advisory services that help businesses grow with confidence.",
+      "SERVICES_BUTTON": "Our Services",
+      "CONTACT_BUTTON": "Contact Us"
+    },
+    "SERVICES": {
+      "EYEBROW": "WHAT WE DO",
+      "TITLE": "Our Services",
+      "AUDIT": {
+        "TITLE": "Audit & Assurance",
+        "DESCRIPTION": "Independent audits to ensure accuracy, transparency and compliance."
+      },
+      "ACCOUNTING": {
+        "TITLE": "Accounting Services",
+        "DESCRIPTION": "Accurate bookkeeping and financial reporting tailored to your needs."
+      },
+      "TAX": {
+        "TITLE": "Tax Services",
+        "DESCRIPTION": "Tax planning, compliance and advisory to optimize your financial position."
+      },
+      "ADVISORY": {
+        "TITLE": "Advisory Services",
+        "DESCRIPTION": "Strategic advice to help you make better decisions and achieve your goals."
+      }
+    }
+  },
+
+  "ABOUT": {
+    "HERO": {
+      "EYEBROW": "ABOUT ATWI",
+      "TITLE": "Trusted Expertise for Better Business Decisions",
+      "DESCRIPTION": "ATWI Audit & Accounting provides professional audit, accounting, tax and advisory services to businesses across Lebanon."
+    },
+    "INTRO": {
+      "EYEBROW": "WHO WE ARE",
+      "TITLE": "Professional, Reliable and Committed",
+      "PARAGRAPH_ONE": "We help companies maintain accurate financial records, comply with regulations and make informed decisions with confidence.",
+      "PARAGRAPH_TWO": "Our work is based on professionalism, confidentiality, accuracy and long-term relationships with our clients."
+    },
+    "VALUES": {
+      "EYEBROW": "OUR FOUNDATION",
+      "TITLE": "What Guides Us",
+      "MISSION": {
+        "TITLE": "Our Mission",
+        "DESCRIPTION": "To deliver accurate and dependable financial services that support the growth and stability of our clients."
+      },
+      "VISION": {
+        "TITLE": "Our Vision",
+        "DESCRIPTION": "To be a trusted accounting and audit partner known for quality, integrity and professional excellence."
+      },
+      "CORE_VALUES": {
+        "TITLE": "Our Values",
+        "DESCRIPTION": "Integrity, confidentiality, accuracy, responsibility and commitment guide every service we provide."
+      }
+    },
+    "WHY": {
+      "EYEBROW": "WHY CHOOSE US",
+      "TITLE": "A Partner You Can Rely On",
+      "ITEM_ONE": "Professional and confidential service",
+      "ITEM_TWO": "Strong knowledge of Lebanese business requirements",
+      "ITEM_THREE": "Clear communication and practical advice",
+      "ITEM_FOUR": "Solutions adapted to each client’s needs"
+    }
+  },
+
+  "SERVICES": {
+    "HEADER": {
+      "TITLE": "Our Services",
+      "DESCRIPTION": "We provide comprehensive accounting, auditing, taxation and business advisory services tailored to the needs of businesses in Lebanon."
+    },
+    "AUDIT": {
+      "TITLE": "Financial Statement Auditing",
+      "DESCRIPTION": "Independent auditing of financial statements to ensure accuracy, transparency and compliance with professional standards."
+    },
+    "ACCOUNTING": {
+      "TITLE": "Accounting & Bookkeeping",
+      "DESCRIPTION": "Preparation and maintenance of accounting records, financial books and day-to-day bookkeeping services."
+    },
+    "TAX": {
+      "TITLE": "Tax Services",
+      "DESCRIPTION": "Preparation of tax declarations and professional tax consulting to help businesses meet their tax obligations."
+    },
+    "COMPANY_FORMATION": {
+      "TITLE": "Company Formation",
+      "DESCRIPTION": "Company incorporation, registration, licensing and all related administrative procedures."
+    },
+    "CONSULTING": {
+      "TITLE": "Financial & Administrative Consulting",
+      "DESCRIPTION": "Strategic financial and administrative consulting to support business growth and improve operational performance."
+    },
+    "REPORTS": {
+      "TITLE": "Financial Reports",
+      "DESCRIPTION": "Preparation of financial reports and complete financial statements for informed decision-making."
+    },
+    "COMPLIANCE": {
+      "TITLE": "Regulatory Compliance",
+      "DESCRIPTION": "Assisting companies in complying with Lebanese accounting standards, regulations and applicable laws."
+    }
+  },
+
+  "LOCATION": {
+    "HERO": {
+      "EYEBROW": "OUR LOCATION",
+      "TITLE": "Visit Our Office",
+      "DESCRIPTION": "Meet our team and receive professional guidance for your audit, accounting, tax and business needs."
+    },
+    "OFFICE": {
+      "EYEBROW": "MAIN OFFICE",
+      "TITLE": "ATWI Audit & Accounting",
+      "DESCRIPTION": "Contact us before your visit so we can prepare the right specialist for your request."
+    },
+    "DETAILS": {
+      "ADDRESS": {
+        "TITLE": "Address",
+        "CITY": "Beirut, Lebanon",
+        "EXTRA": "Replace this text with the full office address."
+      },
+      "PHONE": {
+        "TITLE": "Phone"
+      },
+      "EMAIL": {
+        "TITLE": "Email"
+      },
+      "HOURS": {
+        "TITLE": "Office Hours",
+        "WEEKDAY": "Monday – Friday: 8:00 AM – 5:00 PM",
+        "SATURDAY": "Saturday: By appointment",
+        "SUNDAY": "Sunday: Closed"
+      }
+    },
+    "ACTIONS": {
+      "DIRECTIONS": "Get Directions",
+      "CONTACT": "Contact Us"
+    },
+    "MAP": {
+      "EYEBROW": "GOOGLE MAP",
+      "TITLE": "Map Location Coming Soon",
+      "DESCRIPTION": "The interactive office map will appear here once the company location is available on Google Maps."
+    },
+    "VISIT": {
+      "EYEBROW": "HOW WE CAN HELP",
+      "TITLE": "Services Available at Our Office",
+      "ACCOUNTING": {
+        "TITLE": "Accounting Consultation",
+        "DESCRIPTION": "Discuss bookkeeping, financial statements and the accounting needs of your business."
+      },
+      "AUDIT": {
+        "TITLE": "Audit Meetings",
+        "DESCRIPTION": "Prepare documents and discuss audit requirements directly with our professional team."
+      },
+      "TAX": {
+        "TITLE": "Tax Assistance",
+        "DESCRIPTION": "Receive guidance regarding tax declarations, compliance and financial planning."
+      },
+      "COMPANY": {
+        "TITLE": "Company Services",
+        "DESCRIPTION": "Ask about company registration, official forms and administrative procedures."
+      }
+    },
+    "APPOINTMENT": {
+      "EYEBROW": "PLAN YOUR VISIT",
+      "TITLE": "Schedule an Appointment with Our Team",
+      "DESCRIPTION": "Contact us before visiting so we can prepare the right person and documents for your request.",
+      "BUTTON": "Book an Appointment"
+    }
+  },
+
+  "OFFICIAL_FORMS": {
+    "HEADER": {
+      "EYEBROW": "AVAILABLE FORMS",
+      "TITLE": "Download the Document You Need"
+    },
+    "SEARCH": {
+      "LABEL": "Search forms",
+      "PLACEHOLDER": "Search by title or category"
+    },
+    "CATEGORIES": {
+      "ALL": "All",
+      "TAX": "Tax",
+      "COMPANY": "Company",
+      "ACCOUNTING": "Accounting",
+      "OTHER": "Other"
+    },
+    "EMPTY": {
+      "TITLE": "No forms found",
+      "DESCRIPTION": "Try changing the search text or category."
+    },
+    "CARD": {
+      "UPDATED": "Updated",
+      "VIEW": "View",
+      "DOWNLOAD": "Download"
+    }
+  },
+
+  "CAREERS": {
+    "HERO": {
+      "EYEBROW": "CAREERS AT ATWI",
+      "TITLE": "Build Your Career with Confidence",
+      "DESCRIPTION": "Join a professional environment where you can develop your accounting, audit and business skills while gaining valuable practical experience."
+    },
+    "BENEFITS": {
+      "EYEBROW": "WHY JOIN US",
+      "TITLE": "Grow with ATWI",
+      "PROFESSIONAL_EXPERIENCE": {
+        "TITLE": "Professional Experience",
+        "DESCRIPTION": "Work on real accounting, audit and financial assignments with experienced professionals."
+      },
+      "CONTINUOUS_LEARNING": {
+        "TITLE": "Continuous Learning",
+        "DESCRIPTION": "Improve your technical knowledge and develop practical skills in a professional environment."
+      },
+      "CAREER_DEVELOPMENT": {
+        "TITLE": "Career Development",
+        "DESCRIPTION": "Build a strong foundation for your future career in accounting, auditing, tax or business advisory."
+      },
+      "TEAM_COLLABORATION": {
+        "TITLE": "Team Collaboration",
+        "DESCRIPTION": "Learn how to communicate, solve problems and work effectively as part of a professional team."
+      }
+    },
+    "APPLICATION": {
+      "EYEBROW": "INTERNSHIP APPLICATION",
+      "TITLE": "Start Your Professional Journey",
+      "DESCRIPTION": "Complete the form and upload your CV. Our team will review your application and contact you when a suitable opportunity is available.",
+      "NOTES": {
+        "REQUIRED_FIELDS": "Complete all required fields before submitting your application.",
+        "RECENT_CV": "Upload a recent CV containing your education and experience.",
+        "PDF_LIMIT": "Accepted CV format: PDF. Maximum file size is 5 MB.",
+        "NO_GUARANTEE": "Submitting an application does not guarantee immediate placement."
+      }
+    },
+    "FORM": {
+      "FIRST_NAME": {
+        "LABEL": "First Name",
+        "PLACEHOLDER": "Enter your first name"
+      },
+      "LAST_NAME": {
+        "LABEL": "Last Name",
+        "PLACEHOLDER": "Enter your last name"
+      },
+      "EMAIL": {
+        "LABEL": "Email Address",
+        "PLACEHOLDER": "name@example.com"
+      },
+      "PHONE": {
+        "LABEL": "Phone Number",
+        "PLACEHOLDER": "+961"
+      },
+      "UNIVERSITY": {
+        "LABEL": "University",
+        "PLACEHOLDER": "Enter your university"
+      },
+      "MAJOR": {
+        "LABEL": "Major or Degree",
+        "PLACEHOLDER": "Accounting, Finance..."
+      },
+      "CV": {
+        "LABEL": "Upload CV",
+        "SELECTED_FILE": "Selected file",
+        "REMOVE": "Remove",
+        "HELP": "Choose a PDF file with a maximum size of 5 MB.",
+        "PDF_ONLY_ERROR": "Only PDF files are allowed.",
+        "SIZE_ERROR": "The PDF file must be smaller than 5 MB."
+      },
+      "MESSAGE": {
+        "LABEL": "Message",
+        "PLACEHOLDER": "Tell us briefly about yourself and your career goals."
+      },
+      "CONSENT": "I confirm that the information provided is accurate and I agree that ATWI may review my application details.",
+      "SUBMIT": "Submit Application"
+    }
+  },
+
+  "FOOTER": {
+    "BRAND": {
+      "DESCRIPTION": "Professional audit, accounting, tax and advisory services helping businesses grow with confidence."
+    },
+    "QUICK_LINKS": {
+      "TITLE": "Quick Links"
+    },
+    "CONTACT": {
+      "TITLE": "Contact Us",
+      "PHONE": "Phone",
+      "EMAIL": "Email",
+      "LOCATION": "Location",
+      "COUNTRY": "Lebanon"
+    },
+    "HOURS": {
+      "TITLE": "Office Hours",
+      "WEEKDAYS": "Monday – Friday",
+      "TIME": "10:00 AM – 4:00 PM",
+      "SATURDAY": "Saturday: By appointment",
+      "SUNDAY": "Sunday: Closed"
+    },
+    "BOTTOM": {
+      "COPYRIGHT": "© 2026 ATWI Audit & Accounting. All rights reserved.",
+      "PRIVACY": "Privacy Policy",
+      "TERMS": "Terms of Use"
+    }
+  }
+}

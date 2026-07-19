@@ -1,59 +1,92 @@
 <section class="careers-hero">
   <div class="careers-hero-content">
-    <p class="eyebrow">CAREERS AT ATWI</p>
+    <p class="eyebrow">
+      {{ 'CAREERS.HERO.EYEBROW' | translate }}
+    </p>
 
-    <h1>Build Your Career with Confidence</h1>
+    <h1>
+      {{ 'CAREERS.HERO.TITLE' | translate }}
+    </h1>
 
     <div class="gold-line"></div>
 
     <p class="intro">
-      Join a professional environment where you can develop your accounting,
-      audit and business skills while gaining valuable practical experience.
+      {{ 'CAREERS.HERO.DESCRIPTION' | translate }}
     </p>
   </div>
 </section>
 
 <section class="benefits-section">
   <div class="section-heading">
-    <p>WHY JOIN US</p>
-    <h2>Grow with ATWI</h2>
+    <p>
+      {{ 'CAREERS.BENEFITS.EYEBROW' | translate }}
+    </p>
+
+    <h2>
+      {{ 'CAREERS.BENEFITS.TITLE' | translate }}
+    </h2>
+
     <div class="small-line"></div>
   </div>
 
   <div class="benefits-grid">
     <article class="benefit-card">
       <div class="benefit-number">01</div>
-      <h3>Professional Experience</h3>
+
+      <h3>
+        {{ 'CAREERS.BENEFITS.PROFESSIONAL_EXPERIENCE.TITLE' | translate }}
+      </h3>
+
       <p>
-        Work on real accounting, audit and financial assignments with
-        experienced professionals.
+        {{
+          'CAREERS.BENEFITS.PROFESSIONAL_EXPERIENCE.DESCRIPTION'
+            | translate
+        }}
       </p>
     </article>
 
     <article class="benefit-card">
       <div class="benefit-number">02</div>
-      <h3>Continuous Learning</h3>
+
+      <h3>
+        {{ 'CAREERS.BENEFITS.CONTINUOUS_LEARNING.TITLE' | translate }}
+      </h3>
+
       <p>
-        Improve your technical knowledge and develop practical skills in a
-        professional environment.
+        {{
+          'CAREERS.BENEFITS.CONTINUOUS_LEARNING.DESCRIPTION'
+            | translate
+        }}
       </p>
     </article>
 
     <article class="benefit-card">
       <div class="benefit-number">03</div>
-      <h3>Career Development</h3>
+
+      <h3>
+        {{ 'CAREERS.BENEFITS.CAREER_DEVELOPMENT.TITLE' | translate }}
+      </h3>
+
       <p>
-        Build a strong foundation for your future career in accounting,
-        auditing, tax or business advisory.
+        {{
+          'CAREERS.BENEFITS.CAREER_DEVELOPMENT.DESCRIPTION'
+            | translate
+        }}
       </p>
     </article>
 
     <article class="benefit-card">
       <div class="benefit-number">04</div>
-      <h3>Team Collaboration</h3>
+
+      <h3>
+        {{ 'CAREERS.BENEFITS.TEAM_COLLABORATION.TITLE' | translate }}
+      </h3>
+
       <p>
-        Learn how to communicate, solve problems and work effectively as part
-        of a professional team.
+        {{
+          'CAREERS.BENEFITS.TEAM_COLLABORATION.DESCRIPTION'
+            | translate
+        }}
       </p>
     </article>
   </div>
@@ -61,34 +94,49 @@
 
 <section class="application-section">
   <div class="application-information">
-    <p class="eyebrow">INTERNSHIP APPLICATION</p>
+    <p class="eyebrow">
+      {{ 'CAREERS.APPLICATION.EYEBROW' | translate }}
+    </p>
 
-    <h2>Start Your Professional Journey</h2>
+    <h2>
+      {{ 'CAREERS.APPLICATION.TITLE' | translate }}
+    </h2>
 
     <p class="application-description">
-      Complete the form and upload your CV. Our team will review your
-      application and contact you when a suitable opportunity is available.
+      {{ 'CAREERS.APPLICATION.DESCRIPTION' | translate }}
     </p>
 
     <div class="application-notes">
       <div class="note-item">
         <span>✓</span>
-        <p>Complete all required fields before submitting your application.</p>
+
+        <p>
+          {{ 'CAREERS.APPLICATION.NOTES.REQUIRED_FIELDS' | translate }}
+        </p>
       </div>
 
       <div class="note-item">
         <span>✓</span>
-        <p>Upload a recent CV containing your education and experience.</p>
+
+        <p>
+          {{ 'CAREERS.APPLICATION.NOTES.RECENT_CV' | translate }}
+        </p>
       </div>
 
       <div class="note-item">
         <span>✓</span>
-        <p>Accepted CV format: PDF. Maximum file size is 5 MB.</p>
+
+        <p>
+          {{ 'CAREERS.APPLICATION.NOTES.PDF_LIMIT' | translate }}
+        </p>
       </div>
 
       <div class="note-item">
         <span>✓</span>
-        <p>Submitting an application does not guarantee immediate placement.</p>
+
+        <p>
+          {{ 'CAREERS.APPLICATION.NOTES.NO_GUARANTEE' | translate }}
+        </p>
       </div>
     </div>
   </div>
@@ -97,28 +145,30 @@
     <div class="form-row">
       <div class="form-group">
         <label for="firstName">
-          First Name <span>*</span>
+          {{ 'CAREERS.FORM.FIRST_NAME.LABEL' | translate }}
+          <span>*</span>
         </label>
 
         <input
           id="firstName"
           name="firstName"
           type="text"
-          placeholder="Enter your first name"
+          [placeholder]="'CAREERS.FORM.FIRST_NAME.PLACEHOLDER' | translate"
           required
         >
       </div>
 
       <div class="form-group">
         <label for="lastName">
-          Last Name <span>*</span>
+          {{ 'CAREERS.FORM.LAST_NAME.LABEL' | translate }}
+          <span>*</span>
         </label>
 
         <input
           id="lastName"
           name="lastName"
           type="text"
-          placeholder="Enter your last name"
+          [placeholder]="'CAREERS.FORM.LAST_NAME.PLACEHOLDER' | translate"
           required
         >
       </div>
@@ -127,28 +177,30 @@
     <div class="form-row">
       <div class="form-group">
         <label for="email">
-          Email Address <span>*</span>
+          {{ 'CAREERS.FORM.EMAIL.LABEL' | translate }}
+          <span>*</span>
         </label>
 
         <input
           id="email"
           name="email"
           type="email"
-          placeholder="name@example.com"
+          [placeholder]="'CAREERS.FORM.EMAIL.PLACEHOLDER' | translate"
           required
         >
       </div>
 
       <div class="form-group">
         <label for="phone">
-          Phone Number <span>*</span>
+          {{ 'CAREERS.FORM.PHONE.LABEL' | translate }}
+          <span>*</span>
         </label>
 
         <input
           id="phone"
           name="phone"
           type="tel"
-          placeholder="+961"
+          [placeholder]="'CAREERS.FORM.PHONE.PLACEHOLDER' | translate"
           required
         >
       </div>
@@ -156,31 +208,36 @@
 
     <div class="form-row">
       <div class="form-group">
-        <label for="university">University</label>
+        <label for="university">
+          {{ 'CAREERS.FORM.UNIVERSITY.LABEL' | translate }}
+        </label>
 
         <input
           id="university"
           name="university"
           type="text"
-          placeholder="Enter your university"
+          [placeholder]="'CAREERS.FORM.UNIVERSITY.PLACEHOLDER' | translate"
         >
       </div>
 
       <div class="form-group">
-        <label for="major">Major or Degree</label>
+        <label for="major">
+          {{ 'CAREERS.FORM.MAJOR.LABEL' | translate }}
+        </label>
 
         <input
           id="major"
           name="major"
           type="text"
-          placeholder="Accounting, Finance..."
+          [placeholder]="'CAREERS.FORM.MAJOR.PLACEHOLDER' | translate"
         >
       </div>
     </div>
 
     <div class="form-group">
       <label for="cv">
-        Upload CV <span>*</span>
+        {{ 'CAREERS.FORM.CV.LABEL' | translate }}
+        <span>*</span>
       </label>
 
       <div class="file-input">
@@ -197,7 +254,10 @@
         @if (selectedFileName()) {
           <div class="selected-file">
             <div class="selected-file-information">
-              <strong>Selected file</strong>
+              <strong>
+                {{ 'CAREERS.FORM.CV.SELECTED_FILE' | translate }}
+              </strong>
+
               <p>{{ selectedFileName() }}</p>
             </div>
 
@@ -206,13 +266,13 @@
               class="remove-file-button"
               (click)="removeSelectedFile(cvInput)"
             >
-              Remove
+              {{ 'CAREERS.FORM.CV.REMOVE' | translate }}
             </button>
           </div>
         }
 
         <p class="file-help">
-          Choose a PDF file with a maximum size of 5 MB.
+          {{ 'CAREERS.FORM.CV.HELP' | translate }}
         </p>
 
         @if (fileError()) {
@@ -224,27 +284,35 @@
     </div>
 
     <div class="form-group">
-      <label for="message">Message</label>
+      <label for="message">
+        {{ 'CAREERS.FORM.MESSAGE.LABEL' | translate }}
+      </label>
 
       <textarea
         id="message"
         name="message"
         rows="6"
-        placeholder="Tell us briefly about yourself and your career goals."
+        [placeholder]="'CAREERS.FORM.MESSAGE.PLACEHOLDER' | translate"
       ></textarea>
     </div>
 
     <label class="consent">
-      <input type="checkbox" name="consent" required>
+      <input
+        type="checkbox"
+        name="consent"
+        required
+      >
 
       <span>
-        I confirm that the information provided is accurate and I agree that
-        ATWI may review my application details.
+        {{ 'CAREERS.FORM.CONSENT' | translate }}
       </span>
     </label>
 
-    <button type="submit" class="submit-button">
-      Submit Application
+    <button
+      type="submit"
+      class="submit-button"
+    >
+      {{ 'CAREERS.FORM.SUBMIT' | translate }}
       <span>→</span>
     </button>
   </form>

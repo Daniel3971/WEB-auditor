@@ -15,35 +15,41 @@
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
     >
-      Home
+      {{ 'NAV.HOME' | translate }}
     </a>
 
     <a routerLink="/about" routerLinkActive="active">
-      About Us
+      {{ 'NAV.ABOUT' | translate }}
     </a>
 
     <a routerLink="/services" routerLinkActive="active">
-      Services
+      {{ 'NAV.SERVICES' | translate }}
     </a>
 
     <a routerLink="/locations" routerLinkActive="active">
-      Locations
+      {{ 'NAV.LOCATIONS' | translate }}
     </a>
 
     <a routerLink="/official-forms" routerLinkActive="active">
-      Official Forms
-    </a>
+  {{ 'NAV.OFFICIAL_FORMS' | translate }}
+</a>
 
     <a routerLink="/careers" routerLinkActive="active">
-      Careers
+      {{ 'NAV.CAREERS' | translate }}
     </a>
 
-    <a routerLink="/contact" routerLinkActive="active">
-      Contact
-    </a>
+  
   </nav>
 
-  <button type="button" class="language-button">
-    🌐 EN⌄
+  <button
+    type="button"
+    class="language-button"
+    (click)="language.toggleLanguage()"
+  >
+    <span>🌐</span>
+
+    {{ language.currentLanguage === 'en' ? 'EN' : 'AR' }}
+
+    <span class="language-arrow"></span>
   </button>
 </header>

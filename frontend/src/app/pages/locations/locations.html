@@ -1,14 +1,17 @@
 <section class="locations-hero">
   <div class="locations-hero-content">
-    <p class="eyebrow">OUR LOCATION</p>
+    <p class="eyebrow">
+      {{ 'LOCATION.HERO.EYEBROW' | translate }}
+    </p>
 
-    <h1>Visit Our Office</h1>
+    <h1>
+      {{ 'LOCATION.HERO.TITLE' | translate }}
+    </h1>
 
     <div class="gold-line"></div>
 
     <p class="intro">
-      Meet our team and receive professional guidance for your audit,
-      accounting, tax and business needs.
+      {{ 'LOCATION.HERO.DESCRIPTION' | translate }}
     </p>
   </div>
 </section>
@@ -16,23 +19,31 @@
 <section class="office-section">
   <article class="office-card">
     <div class="office-heading">
-      <p class="eyebrow">MAIN OFFICE</p>
-      <h2>ATWI Audit & Accounting</h2>
+      <p class="eyebrow">
+        {{ 'LOCATION.OFFICE.EYEBROW' | translate }}
+      </p>
+
+      <h2>
+        {{ 'LOCATION.OFFICE.TITLE' | translate }}
+      </h2>
+
       <p>
-        Contact us before your visit so we can prepare the right specialist
-        for your request.
+        {{ 'LOCATION.OFFICE.DESCRIPTION' | translate }}
       </p>
     </div>
 
     <div class="office-details">
+
       <div class="detail-item">
         <div class="detail-icon">📍</div>
 
         <div>
-          <h3>Address</h3>
-          <p>Beirut, Lebanon</p>
+          <h3>{{ 'LOCATION.DETAILS.ADDRESS.TITLE' | translate }}</h3>
+
+          <p>{{ 'LOCATION.DETAILS.ADDRESS.CITY' | translate }}</p>
+
           <p class="secondary-text">
-            Replace this text with the full office address.
+            {{ 'LOCATION.DETAILS.ADDRESS.EXTRA' | translate }}
           </p>
         </div>
       </div>
@@ -41,8 +52,11 @@
         <div class="detail-icon">☎</div>
 
         <div>
-          <h3>Phone</h3>
-          <a href="tel:+96100000000">+961 00 000 000</a>
+          <h3>{{ 'LOCATION.DETAILS.PHONE.TITLE' | translate }}</h3>
+
+          <a href="tel:+96100000000">
+            +961 00 000 000
+          </a>
         </div>
       </div>
 
@@ -50,8 +64,11 @@
         <div class="detail-icon">✉</div>
 
         <div>
-          <h3>Email</h3>
-          <a href="mailto:info@atwi.com">info&#64;atwi.com</a>
+          <h3>{{ 'LOCATION.DETAILS.EMAIL.TITLE' | translate }}</h3>
+
+          <a href="mailto:info@atwi.com">
+            info&#64;atwi.com
+          </a>
         </div>
       </div>
 
@@ -59,104 +76,133 @@
         <div class="detail-icon">◷</div>
 
         <div>
-          <h3>Office Hours</h3>
-          <p>Monday – Friday: 8:00 AM – 5:00 PM</p>
-          <p>Saturday: By appointment</p>
-          <p>Sunday: Closed</p>
+          <h3>{{ 'LOCATION.DETAILS.HOURS.TITLE' | translate }}</h3>
+
+          <p>{{ 'LOCATION.DETAILS.HOURS.WEEKDAY' | translate }}</p>
+
+          <p>{{ 'LOCATION.DETAILS.HOURS.SATURDAY' | translate }}</p>
+
+          <p>{{ 'LOCATION.DETAILS.HOURS.SUNDAY' | translate }}</p>
         </div>
       </div>
+
     </div>
 
     <div class="office-actions">
+
       <a
         href="https://maps.google.com"
         target="_blank"
         rel="noopener noreferrer"
         class="primary-action"
       >
-        Get Directions
+        {{ 'LOCATION.ACTIONS.DIRECTIONS' | translate }}
         <span>→</span>
       </a>
 
-      <a routerLink="/contact" class="secondary-action">
-        Contact Us
+      <a
+        routerLink="/contact"
+        class="secondary-action"
+      >
+        {{ 'LOCATION.ACTIONS.CONTACT' | translate }}
       </a>
+
     </div>
   </article>
 
   <div class="map-placeholder">
+
     <div class="map-icon">⌖</div>
 
-    <p class="eyebrow">GOOGLE MAP</p>
+    <p class="eyebrow">
+      {{ 'LOCATION.MAP.EYEBROW' | translate }}
+    </p>
 
-    <h2>Map Location Coming Soon</h2>
+    <h2>
+      {{ 'LOCATION.MAP.TITLE' | translate }}
+    </h2>
 
     <p>
-      The interactive office map will appear here once the company location
-      is available on Google Maps.
+      {{ 'LOCATION.MAP.DESCRIPTION' | translate }}
     </p>
+
   </div>
 </section>
 
 <section class="visit-section">
+
   <div class="section-heading">
-    <p>HOW WE CAN HELP</p>
-    <h2>Services Available at Our Office</h2>
+
+    <p>
+      {{ 'LOCATION.VISIT.EYEBROW' | translate }}
+    </p>
+
+    <h2>
+      {{ 'LOCATION.VISIT.TITLE' | translate }}
+    </h2>
+
     <div class="small-line"></div>
+
   </div>
 
   <div class="visit-grid">
+
     <article class="visit-card">
+
       <div class="visit-number">01</div>
-      <h3>Accounting Consultation</h3>
+
+      <h3>
+        {{ 'LOCATION.VISIT.ACCOUNTING.TITLE' | translate }}
+      </h3>
+
       <p>
-        Discuss bookkeeping, financial statements and the accounting needs
-        of your business.
+        {{ 'LOCATION.VISIT.ACCOUNTING.DESCRIPTION' | translate }}
       </p>
+
     </article>
 
     <article class="visit-card">
+
       <div class="visit-number">02</div>
-      <h3>Audit Meetings</h3>
+
+      <h3>
+        {{ 'LOCATION.VISIT.AUDIT.TITLE' | translate }}
+      </h3>
+
       <p>
-        Prepare documents and discuss audit requirements directly with our
-        professional team.
+        {{ 'LOCATION.VISIT.AUDIT.DESCRIPTION' | translate }}
       </p>
+
     </article>
 
     <article class="visit-card">
+
       <div class="visit-number">03</div>
-      <h3>Tax Assistance</h3>
+
+      <h3>
+        {{ 'LOCATION.VISIT.TAX.TITLE' | translate }}
+      </h3>
+
       <p>
-        Receive guidance regarding tax declarations, compliance and
-        financial planning.
+        {{ 'LOCATION.VISIT.TAX.DESCRIPTION' | translate }}
       </p>
+
     </article>
 
     <article class="visit-card">
+
       <div class="visit-number">04</div>
-      <h3>Company Services</h3>
+
+      <h3>
+        {{ 'LOCATION.VISIT.COMPANY.TITLE' | translate }}
+      </h3>
+
       <p>
-        Ask about company registration, official forms and administrative
-        procedures.
+        {{ 'LOCATION.VISIT.COMPANY.DESCRIPTION' | translate }}
       </p>
+
     </article>
+
   </div>
 </section>
 
-<section class="appointment-section">
-  <div>
-    <p class="eyebrow">PLAN YOUR VISIT</p>
-    <h2>Schedule an Appointment with Our Team</h2>
-
-    <p>
-      Contact us before visiting so we can prepare the right person and
-      documents for your request.
-    </p>
-  </div>
-
-  <a routerLink="/contact">
-    Book an Appointment
-    <span>→</span>
-  </a>
-</section>

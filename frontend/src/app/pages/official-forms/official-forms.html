@@ -1,1 +1,156 @@
-<p>official-forms works!</p>
+<section class="forms-section">
+  <div class="forms-toolbar">
+    <div>
+      <p class="eyebrow">
+        {{ 'OFFICIAL_FORMS.HEADER.EYEBROW' | translate }}
+      </p>
+
+      <h2>
+        {{ 'OFFICIAL_FORMS.HEADER.TITLE' | translate }}
+      </h2>
+    </div>
+
+    <div class="search-box">
+      <label for="formSearch">
+        {{ 'OFFICIAL_FORMS.SEARCH.LABEL' | translate }}
+      </label>
+
+      <input
+        id="formSearch"
+        type="search"
+        [placeholder]="'OFFICIAL_FORMS.SEARCH.PLACEHOLDER' | translate"
+        [value]="searchTerm()"
+        (input)="updateSearch($event)"
+      >
+    </div>
+  </div>
+
+  <div class="category-list">
+    <button
+      type="button"
+      [class.active]="selectedCategory() === 'All'"
+      (click)="selectCategory('All')"
+    >
+      {{ 'OFFICIAL_FORMS.CATEGORIES.ALL' | translate }}
+    </button>
+
+    <button
+      type="button"
+      [class.active]="selectedCategory() === 'Tax'"
+      (click)="selectCategory('Tax')"
+    >
+      {{ 'OFFICIAL_FORMS.CATEGORIES.TAX' | translate }}
+    </button>
+
+    <button
+      type="button"
+      [class.active]="selectedCategory() === 'Company'"
+      (click)="selectCategory('Company')"
+    >
+      {{ 'OFFICIAL_FORMS.CATEGORIES.COMPANY' | translate }}
+    </button>
+
+    <button
+      type="button"
+      [class.active]="selectedCategory() === 'Accounting'"
+      (click)="selectCategory('Accounting')"
+    >
+      {{ 'OFFICIAL_FORMS.CATEGORIES.ACCOUNTING' | translate }}
+    </button>
+
+    <button
+      type="button"
+      [class.active]="selectedCategory() === 'Other'"
+      (click)="selectCategory('Other')"
+    >
+      {{ 'OFFICIAL_FORMS.CATEGORIES.OTHER' | translate }}
+    </button>
+  </div>
+
+  @if (filteredForms().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">📄</div>
+
+      <h3>
+        {{ 'OFFICIAL_FORMS.EMPTY.TITLE' | translate }}
+      </h3>
+
+      <p>
+        {{ 'OFFICIAL_FORMS.EMPTY.DESCRIPTION' | translate }}
+      </p>
+    </div>
+  }
+
+  @if (filteredForms().length > 0) {
+    <div class="forms-grid">
+      @for (form of filteredForms(); track form.id) {
+        <article class="form-card">
+          <div class="form-card-top">
+            <div class="pdf-icon">PDF</div>
+
+            <span class="category-badge">
+              @switch (form.category) {
+                @case ('Tax') {
+                  {{ 'OFFICIAL_FORMS.CATEGORIES.TAX' | translate }}
+                }
+
+                @case ('Company') {
+                  {{ 'OFFICIAL_FORMS.CATEGORIES.COMPANY' | translate }}
+                }
+
+                @case ('Accounting') {
+                  {{ 'OFFICIAL_FORMS.CATEGORIES.ACCOUNTING' | translate }}
+                }
+
+                @case ('Other') {
+                  {{ 'OFFICIAL_FORMS.CATEGORIES.OTHER' | translate }}
+                }
+
+                @default {
+                  {{ form.category }}
+                }
+              }
+            </span>
+          </div>
+
+          <div class="form-card-content">
+            <h3>{{ form.title }}</h3>
+
+            <p>
+              {{ form.description }}
+            </p>
+
+            <div class="form-meta">
+              <span>
+                {{ 'OFFICIAL_FORMS.CARD.UPDATED' | translate }}:
+                {{ form.updatedAt }}
+              </span>
+
+              <span>{{ form.fileSize }}</span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <a
+              [href]="form.downloadUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="view-button"
+            >
+              {{ 'OFFICIAL_FORMS.CARD.VIEW' | translate }}
+            </a>
+
+            <a
+              [href]="form.downloadUrl"
+              [attr.download]="form.fileName"
+              class="download-button"
+            >
+              {{ 'OFFICIAL_FORMS.CARD.DOWNLOAD' | translate }}
+              <span>↓</span>
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>

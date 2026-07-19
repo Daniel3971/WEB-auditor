@@ -3,26 +3,25 @@
   <div class="hero-text">
 
     <h1>
-      Your Trusted Partner in
-      <span>Audit & Accounting</span>
+      {{ 'HOME.HERO.TITLE_FIRST' | translate }}
+      <span>{{ 'HOME.HERO.TITLE_SECOND' | translate }}</span>
     </h1>
 
     <div class="gold-line"></div>
 
     <p>
-      We provide high-quality audit, accounting and advisory services
-      that help businesses grow with confidence.
+      {{ 'HOME.HERO.DESCRIPTION' | translate }}
     </p>
 
     <div class="hero-buttons">
 
       <a routerLink="/services" class="button primary-button">
-        Our Services
+        {{ 'HOME.HERO.SERVICES_BUTTON' | translate }}
         <span>→</span>
       </a>
 
       <a routerLink="/contact" class="button secondary-button">
-        Contact Us
+        {{ 'HOME.HERO.CONTACT_BUTTON' | translate }}
         <span>→</span>
       </a>
 
@@ -37,7 +36,8 @@
     <img
       src="picture_homepage.png"
       alt="ATWI Audit & Accounting"
-      class="hero-image">
+      class="hero-image"
+    >
 
   </div>
 
@@ -47,8 +47,10 @@
 <section class="services-section">
 
   <div class="section-heading">
-    <p>WHAT WE DO</p>
-    <h2>Our Services</h2>
+    <p>{{ 'HOME.SERVICES.EYEBROW' | translate }}</p>
+
+    <h2>{{ 'HOME.SERVICES.TITLE' | translate }}</h2>
+
     <div class="small-line"></div>
   </div>
 
@@ -56,54 +58,52 @@
 
     <article class="service-card">
       <div class="service-icon">✓</div>
-      <h3>Audit & Assurance</h3>
+
+      <h3>
+        {{ 'HOME.SERVICES.AUDIT.TITLE' | translate }}
+      </h3>
 
       <p>
-        Independent audits to ensure accuracy,
-        transparency and compliance.
+        {{ 'HOME.SERVICES.AUDIT.DESCRIPTION' | translate }}
       </p>
     </article>
 
     <article class="service-card">
       <div class="service-icon">▦</div>
 
-      <h3>Accounting Services</h3>
+      <h3>
+        {{ 'HOME.SERVICES.ACCOUNTING.TITLE' | translate }}
+      </h3>
 
       <p>
-        Accurate bookkeeping and financial reporting
-        tailored to your needs.
+        {{ 'HOME.SERVICES.ACCOUNTING.DESCRIPTION' | translate }}
       </p>
-
     </article>
 
     <article class="service-card">
-
       <div class="service-icon">TAX</div>
 
-      <h3>Tax Services</h3>
+      <h3>
+        {{ 'HOME.SERVICES.TAX.TITLE' | translate }}
+      </h3>
 
       <p>
-        Tax planning, compliance and advisory to optimize
-        your financial position.
+        {{ 'HOME.SERVICES.TAX.DESCRIPTION' | translate }}
       </p>
-
     </article>
 
     <article class="service-card">
-
       <div class="service-icon">◎</div>
 
-      <h3>Advisory Services</h3>
+      <h3>
+        {{ 'HOME.SERVICES.ADVISORY.TITLE' | translate }}
+      </h3>
 
       <p>
-        Strategic advice to help you make better decisions
-        and achieve your goals.
+        {{ 'HOME.SERVICES.ADVISORY.DESCRIPTION' | translate }}
       </p>
-
     </article>
 
   </div>
 
 </section>
-
-

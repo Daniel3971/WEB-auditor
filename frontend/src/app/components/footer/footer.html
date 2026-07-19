@@ -9,66 +9,131 @@
       >
 
       <p>
-        Professional audit, accounting, tax and advisory services
-        helping businesses grow with confidence.
+        {{ 'FOOTER.BRAND.DESCRIPTION' | translate }}
       </p>
     </section>
 
     <section class="footer-section">
-      <h3>Quick Links</h3>
+
+      <h3>
+        {{ 'FOOTER.QUICK_LINKS.TITLE' | translate }}
+      </h3>
 
       <nav class="footer-links">
-        <a routerLink="/">Home</a>
-        <a routerLink="/about">About Us</a>
-        <a routerLink="/services">Services</a>
-        <a routerLink="/locations">Locations</a>
-        <a routerLink="/official-forms">Official Forms</a>
-        <a routerLink="/careers">Careers</a>
+        <a routerLink="/">
+          {{ 'NAV.HOME' | translate }}
+        </a>
+
+        <a routerLink="/about">
+          {{ 'NAV.ABOUT' | translate }}
+        </a>
+
+        <a routerLink="/services">
+          {{ 'NAV.SERVICES' | translate }}
+        </a>
+
+        <a routerLink="/locations">
+          {{ 'NAV.LOCATIONS' | translate }}
+        </a>
+
+        <a routerLink="/official-forms">
+          {{ 'NAV.OFFICIAL_FORMS' | translate }}
+        </a>
+
+        <a routerLink="/careers">
+          {{ 'NAV.CAREERS' | translate }}
+        </a>
       </nav>
+
     </section>
 
     <section class="footer-section">
-      <h3>Contact Us</h3>
+
+      <h3>
+        {{ 'FOOTER.CONTACT.TITLE' | translate }}
+      </h3>
 
       <div class="contact-list">
+
         <p>
-          <strong>Phone:</strong>
-          <a href="tel:+96100000000">+961 00 000 000</a>
+          <strong>
+            {{ 'FOOTER.CONTACT.PHONE' | translate }}:
+          </strong>
+
+          <a href="tel:+96100000000">
+            +961 00 000 000
+          </a>
         </p>
 
         <p>
-          <strong>Email:</strong>
-          <a href="mailto:info@atwi.com">info&#64;atwi.com</a>
+          <strong>
+            {{ 'FOOTER.CONTACT.EMAIL' | translate }}:
+          </strong>
+
+          <a href="mailto:info@atwi.com">
+            info&#64;atwi.com
+          </a>
         </p>
 
         <p>
-          <strong>Location:</strong>
-          Lebanon
+          <strong>
+            {{ 'FOOTER.CONTACT.LOCATION' | translate }}:
+          </strong>
+
+          {{ 'FOOTER.CONTACT.COUNTRY' | translate }}
         </p>
+
       </div>
+
     </section>
 
     <section class="footer-section">
-      <h3>Office Hours</h3>
+
+      <h3>
+        {{ 'FOOTER.HOURS.TITLE' | translate }}
+      </h3>
 
       <div class="office-hours">
-        <p>Monday – Friday</p>
-        <p>10:00 AM – 4:00 PM</p>
-        <p>Saturday: By appointment</p>
-        <p>Sunday: Closed</p>
+
+        <p>
+          {{ 'FOOTER.HOURS.WEEKDAYS' | translate }}
+        </p>
+
+        <p>
+          {{ 'FOOTER.HOURS.TIME' | translate }}
+        </p>
+
+        <p>
+          {{ 'FOOTER.HOURS.SATURDAY' | translate }}
+        </p>
+
+        <p>
+          {{ 'FOOTER.HOURS.SUNDAY' | translate }}
+        </p>
+
       </div>
+
     </section>
 
   </div>
 
   <div class="footer-bottom">
+
     <p>
-      © 2026 ATWI Audit & Accounting. All rights reserved.
+      {{ 'FOOTER.BOTTOM.COPYRIGHT' | translate }}
     </p>
 
     <div class="footer-bottom-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Use</a>
+
+      <a href="#">
+        {{ 'FOOTER.BOTTOM.PRIVACY' | translate }}
+      </a>
+
+      <a href="#">
+        {{ 'FOOTER.BOTTOM.TERMS' | translate }}
+      </a>
+
     </div>
+
   </div>
 </footer>

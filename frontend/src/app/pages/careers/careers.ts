@@ -1,8 +1,11 @@
 import { Component, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-careers',
-  imports: [],
+  imports: [
+    TranslatePipe
+  ],
   templateUrl: './careers.html',
   styleUrl: './careers.css'
 })
