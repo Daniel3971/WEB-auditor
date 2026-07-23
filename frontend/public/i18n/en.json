@@ -302,9 +302,8 @@
     "HOURS": {
       "TITLE": "Office Hours",
       "WEEKDAYS": "Monday – Friday",
-      "TIME": "10:00 AM – 4:00 PM",
-      "SATURDAY": "Saturday: By appointment",
-      "SUNDAY": "Sunday: Closed"
+      "TIME": "10:00 AM – 4:00 PM"
+
     },
     "BOTTOM": {
       "COPYRIGHT": "© 2026 ATWI Audit & Accounting. All rights reserved.",
