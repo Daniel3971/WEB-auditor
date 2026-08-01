@@ -120,8 +120,7 @@
     },
     "OFFICE": {
       "EYEBROW": "MAIN OFFICE",
-      "TITLE": "ATWI Audit & Accounting",
-      "DESCRIPTION": "Contact us before your visit so we can prepare the right specialist for your request."
+      "TITLE": "ATWI Audit & Accounting"
     },
     "DETAILS": {
       "ADDRESS": {
@@ -137,9 +136,7 @@
       },
       "HOURS": {
         "TITLE": "Office Hours",
-        "WEEKDAY": "Monday – Friday: 8:00 AM – 5:00 PM",
-        "SATURDAY": "Saturday: By appointment",
-        "SUNDAY": "Sunday: Closed"
+        "WEEKDAY": "Monday – Friday: 8:00 AM – 5:00 PM"
       }
     },
     "ACTIONS": {
