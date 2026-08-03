@@ -26,46 +26,16 @@
   </div>
 
   <div class="category-list">
+  @for (category of categories; track category.value) {
     <button
       type="button"
-      [class.active]="selectedCategory() === 'All'"
-      (click)="selectCategory('All')"
+      [class.active]="selectedCategory() === category.value"
+      (click)="selectCategory(category.value)"
     >
-      {{ 'OFFICIAL_FORMS.CATEGORIES.ALL' | translate }}
+      {{ category.labelKey | translate }}
     </button>
-
-    <button
-      type="button"
-      [class.active]="selectedCategory() === 'Tax'"
-      (click)="selectCategory('Tax')"
-    >
-      {{ 'OFFICIAL_FORMS.CATEGORIES.TAX' | translate }}
-    </button>
-
-    <button
-      type="button"
-      [class.active]="selectedCategory() === 'Company'"
-      (click)="selectCategory('Company')"
-    >
-      {{ 'OFFICIAL_FORMS.CATEGORIES.COMPANY' | translate }}
-    </button>
-
-    <button
-      type="button"
-      [class.active]="selectedCategory() === 'Accounting'"
-      (click)="selectCategory('Accounting')"
-    >
-      {{ 'OFFICIAL_FORMS.CATEGORIES.ACCOUNTING' | translate }}
-    </button>
-
-    <button
-      type="button"
-      [class.active]="selectedCategory() === 'Other'"
-      (click)="selectCategory('Other')"
-    >
-      {{ 'OFFICIAL_FORMS.CATEGORIES.OTHER' | translate }}
-    </button>
-  </div>
+  }
+</div>
 
   @if (filteredForms().length === 0) {
     <div class="empty-state">

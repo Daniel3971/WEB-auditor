@@ -136,7 +136,7 @@
       },
       "HOURS": {
         "TITLE": "Office Hours",
-        "WEEKDAY": "Monday – Friday: 8:00 AM – 5:00 PM"
+        "WEEKDAY": "Monday – Friday: 10 AM - 1:00 PM | 3 PM - 6 PM"
       }
     },
     "ACTIONS": {
@@ -294,12 +294,13 @@
       "PHONE": "Phone",
       "EMAIL": "Email",
       "LOCATION": "Location",
-      "COUNTRY": "Lebanon"
+      "COUNTRY": "Lebanon ,Kafaat Main street , Mrayjeh Plaza  3rd Floor"
+  
     },
     "HOURS": {
       "TITLE": "Office Hours",
       "WEEKDAYS": "Monday – Friday",
-      "TIME": "10:00 AM – 4:00 PM"
+      "TIME": "10:00 AM – 1 PM | 3 PM - 6 PM"
 
     },
     "BOTTOM": {

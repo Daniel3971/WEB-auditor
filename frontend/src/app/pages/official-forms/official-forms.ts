@@ -23,6 +23,45 @@ interface OfficialForm {
   styleUrl: './official-forms.css'
 })
 export class OfficialForms {
+  readonly categories = [
+    {
+      value: 'All',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.ALL'
+    },
+    {
+      value: 'Betterment-Tax',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.BETTERMENT_TAX'
+    },
+    {
+      value: 'Built-Property-Tax',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.BUILT_PROPERTY_TAX'
+    },
+    {
+      value: 'Commercial-Industrial-and-Non-Commercial-Profits-Tax',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.COMMERCIAL_PROFITS_TAX'
+    },
+    {
+      value: 'Indirect-Taxes',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.INDIRECT_TAXES'
+    },
+    {
+      value: 'Payroll-and-Wage-Tax',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.PAYROLL_TAX'
+    },
+    {
+      value: 'Tax-on-Income-from-Movable-Capital',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.MOVABLE_CAPITAL_TAX'
+    },
+    {
+      value: 'Transfer-duty',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.TRANSFER_DUTY'
+    },
+    {
+      value: 'VAT',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.VAT'
+    }
+  ];
+
   searchTerm = signal('');
   selectedCategory = signal('All');
 
@@ -83,31 +122,4 @@ export class OfficialForms {
       downloadUrl: '/sample-pdfs/client-information-form.pdf'
     }
   ]);
-
-  filteredForms = computed(() => {
-    const search = this.searchTerm().trim().toLowerCase();
-    const category = this.selectedCategory();
-
-    return this.forms().filter((form) => {
-      const matchesCategory =
-        category === 'All' || form.category === category;
-
-      const matchesSearch =
-        search.length === 0 ||
-        form.title.toLowerCase().includes(search) ||
-        form.description.toLowerCase().includes(search) ||
-        form.category.toLowerCase().includes(search);
-
-      return matchesCategory && matchesSearch;
-    });
-  });
-
-  updateSearch(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.searchTerm.set(input.value);
-  }
-
-  selectCategory(category: string): void {
-    this.selectedCategory.set(category);
-  }
 }
