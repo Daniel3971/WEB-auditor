@@ -89,10 +89,7 @@ export class OfficialForms {
       value: 'TVA',
       labelKey: 'OFFICIAL_FORMS.CATEGORIES.TVA'
     },
-    {
-      value: 'VAT',
-      labelKey: 'OFFICIAL_FORMS.CATEGORIES.VAT'
-    }
+    
   ];
 
   readonly filteredForms = computed(() => {
