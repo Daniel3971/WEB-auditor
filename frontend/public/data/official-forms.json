@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "titleEn": "VAT Form Q1-1",
+    "titleAr": "نموذج ضريبة القيمة المضافة Q1-1",
+    "descriptionEn": "Official VAT form Q1-1.",
+    "descriptionAr": "النموذج الرسمي لضريبة القيمة المضافة Q1-1.",
+    "category": "VAT",
+    "fileName": "form-q1-1.pdf",
+    "fileSize": "420 KB",
+    "updatedAt": "2026",
+    "downloadUrl": "/Taxes/VAT/Q1-1/form-q1-1.pdf"
+  },
+  {
+    "id": 2,
+    "titleEn": "TVA Declaration Form",
+    "titleAr": "نموذج تصريح TVA",
+    "descriptionEn": "Official TVA declaration form.",
+    "descriptionAr": "النموذج الرسمي لتصريح TVA.",
+    "category": "TVA",
+    "fileName": "tva-declaration.pdf",
+    "fileSize": "510 KB",
+    "updatedAt": "2026",
+    "downloadUrl": "/Taxes/TVA/tva-declaration.pdf"
+  },
+{
+  "id": 3,
+  "titleEn": "Built Property Tax Form",
+  "titleAr": "نموذج ضريبة الأملاك المبنية",
+  "descriptionEn": "Official form for built property tax procedures.",
+  "descriptionAr": "النموذج الرسمي لمعاملات ضريبة الأملاك المبنية.",
+  "category": "Built-Property-Tax",
+  "fileName": "built-property-tax.pdf",
+  "fileSize": "350 KB",
+  "updatedAt": "2026",
+  "downloadUrl": "/Taxes/Built-Property-Tax/built-property-tax.pdf"
+}
+]

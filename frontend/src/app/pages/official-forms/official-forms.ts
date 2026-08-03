@@ -1,29 +1,58 @@
-import { Component, computed, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {
+  Component,
+  computed,
+  inject,
+  signal
+} from '@angular/core';
+
+import { HttpClient } from '@angular/common/http';
 import { TranslatePipe } from '@ngx-translate/core';
+
+import { LanguageService } from '../../services/language.service';
 
 interface OfficialForm {
   id: number;
-  title: string;
-  description: string;
-  category: 'Tax' | 'Company' | 'Accounting' | 'Other';
+
+  titleEn: string;
+  titleAr: string;
+
+  descriptionEn: string;
+  descriptionAr: string;
+
+  category: string;
+
   fileName: string;
   fileSize: string;
   updatedAt: string;
   downloadUrl: string;
 }
 
+interface FormCategory {
+  value: string;
+  labelKey: string;
+}
+
 @Component({
   selector: 'app-official-forms',
   imports: [
-    RouterLink,
     TranslatePipe
   ],
   templateUrl: './official-forms.html',
   styleUrl: './official-forms.css'
 })
 export class OfficialForms {
-  readonly categories = [
+  private readonly http = inject(HttpClient);
+
+  readonly language = inject(LanguageService);
+
+  readonly searchTerm = signal('');
+  readonly selectedCategory = signal('All');
+
+  readonly forms = signal<OfficialForm[]>([]);
+  readonly loading = signal(true);
+  readonly loadError = signal('');
+
+  readonly categories: FormCategory[] = [
     {
       value: 'All',
       labelKey: 'OFFICIAL_FORMS.CATEGORIES.ALL'
@@ -57,69 +86,106 @@ export class OfficialForms {
       labelKey: 'OFFICIAL_FORMS.CATEGORIES.TRANSFER_DUTY'
     },
     {
+      value: 'TVA',
+      labelKey: 'OFFICIAL_FORMS.CATEGORIES.TVA'
+    },
+    {
       value: 'VAT',
       labelKey: 'OFFICIAL_FORMS.CATEGORIES.VAT'
     }
   ];
 
-  searchTerm = signal('');
-  selectedCategory = signal('All');
+  readonly filteredForms = computed(() => {
+    const search = this.searchTerm().trim().toLowerCase();
+    const selectedCategory = this.selectedCategory();
 
-  forms = signal<OfficialForm[]>([
-    {
-      id: 1,
-      title: 'Tax Declaration Form',
-      description:
-        'Official form used for preparing and submitting annual tax declarations.',
-      category: 'Tax',
-      fileName: 'tax-declaration-form.pdf',
-      fileSize: '420 KB',
-      updatedAt: 'July 2026',
-      downloadUrl: '/sample-pdfs/tax-declaration-form.pdf'
-    },
-    {
-      id: 2,
-      title: 'Company Registration Form',
-      description:
-        'Required document for company creation and registration procedures.',
-      category: 'Company',
-      fileName: 'company-registration-form.pdf',
-      fileSize: '610 KB',
-      updatedAt: 'June 2026',
-      downloadUrl: '/sample-pdfs/company-registration-form.pdf'
-    },
-    {
-      id: 3,
-      title: 'Accounting Documents Checklist',
-      description:
-        'Checklist of documents required for bookkeeping and financial reporting.',
-      category: 'Accounting',
-      fileName: 'accounting-checklist.pdf',
-      fileSize: '285 KB',
-      updatedAt: 'May 2026',
-      downloadUrl: '/sample-pdfs/accounting-checklist.pdf'
-    },
-    {
-      id: 4,
-      title: 'Audit Preparation Checklist',
-      description:
-        'A practical checklist to help companies prepare for an audit engagement.',
-      category: 'Accounting',
-      fileName: 'audit-preparation-checklist.pdf',
-      fileSize: '360 KB',
-      updatedAt: 'April 2026',
-      downloadUrl: '/sample-pdfs/audit-preparation-checklist.pdf'
-    },
-    {
-      id: 5,
-      title: 'General Client Information Form',
-      description:
-        'General company and contact information form for new clients.',
-      category: 'Other',
-      fileName: 'client-information-form.pdf',
-      fileSize: '190 KB',
-      updatedAt: 'March 2026',
-      downloadUrl: '/sample-pdfs/client-information-form.pdf'
-    }
-  ]);
+    return this.forms().filter((form) => {
+      const matchesCategory =
+        selectedCategory === 'All' ||
+        form.category === selectedCategory;
+
+      /*
+       * Search both English and Arabic content.
+       * This means search continues working after switching languages.
+       */
+      const searchableText = [
+        form.titleEn,
+        form.titleAr,
+        form.descriptionEn,
+        form.descriptionAr,
+        form.category,
+        form.fileName
+      ]
+        .join(' ')
+        .toLowerCase();
+
+      const matchesSearch =
+        search.length === 0 ||
+        searchableText.includes(search);
+
+      return matchesCategory && matchesSearch;
+    });
+  });
+
+  constructor() {
+    this.loadForms();
+  }
+
+  getTitle(form: OfficialForm): string {
+    return this.language.currentLanguage === 'ar'
+      ? form.titleAr
+      : form.titleEn;
+  }
+
+  getDescription(form: OfficialForm): string {
+    return this.language.currentLanguage === 'ar'
+      ? form.descriptionAr
+      : form.descriptionEn;
+  }
+
+  getCategoryLabelKey(category: string): string {
+    const matchingCategory = this.categories.find(
+      (item) => item.value === category
+    );
+
+    return matchingCategory?.labelKey ??
+      'OFFICIAL_FORMS.CATEGORIES.OTHER';
+  }
+
+  updateSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
+  }
+
+  selectCategory(category: string): void {
+    this.selectedCategory.set(category);
+  }
+
+  private loadForms(): void {
+    this.loading.set(true);
+    this.loadError.set('');
+
+    this.http
+      .get<OfficialForm[]>('/data/official-forms.json')
+      .subscribe({
+        next: (forms) => {
+          this.forms.set(forms);
+          this.loading.set(false);
+        },
+
+        error: (error) => {
+          console.error(
+            'Could not load official forms:',
+            error
+          );
+
+          this.forms.set([]);
+          this.loading.set(false);
+
+          this.loadError.set(
+            'The official forms could not be loaded.'
+          );
+        }
+      });
+  }
 }

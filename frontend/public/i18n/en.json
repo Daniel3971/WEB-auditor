@@ -120,13 +120,14 @@
     },
     "OFFICE": {
       "EYEBROW": "MAIN OFFICE",
-      "TITLE": "ATWI Audit & Accounting"
+      "TITLE": "ATWI Audit & Accounting",
+      "DESCRIPTION": "Contact us before your visit so we can prepare the right specialist for your request."
     },
     "DETAILS": {
       "ADDRESS": {
         "TITLE": "Address",
         "CITY": "Beirut, Lebanon",
-        "EXTRA": "Replace this text with the full office address."
+        "EXTRA": "Lebanon, Kafaat Main Street, Mrayjeh Plaza, 3rd Floor"
       },
       "PHONE": {
         "TITLE": "Phone"
@@ -136,7 +137,9 @@
       },
       "HOURS": {
         "TITLE": "Office Hours",
-        "WEEKDAY": "Monday – Friday: 10 AM - 1:00 PM | 3 PM - 6 PM"
+        "WEEKDAY": "Monday – Friday: 10:00 AM – 1:00 PM | 3:00 PM – 6:00 PM",
+        "SATURDAY": "Saturday: By appointment",
+        "SUNDAY": "Sunday: Closed"
       }
     },
     "ACTIONS": {
@@ -187,10 +190,23 @@
     },
     "CATEGORIES": {
       "ALL": "All",
-      "TAX": "Tax",
-      "COMPANY": "Company",
-      "ACCOUNTING": "Accounting",
+      "BETTERMENT_TAX": "Betterment Tax",
+      "BUILT_PROPERTY_TAX": "Built Property Tax",
+      "COMMERCIAL_PROFITS_TAX": "Commercial & Industrial Profits Tax",
+      "INDIRECT_TAXES": "Indirect Taxes",
+      "PAYROLL_TAX": "Payroll & Wage Tax",
+      "MOVABLE_CAPITAL_TAX": "Movable Capital Income Tax",
+      "TRANSFER_DUTY": "Transfer Duty",
+      "TVA": "TVA",
+      "VAT": "VAT",
       "OTHER": "Other"
+    },
+    "LOADING": {
+      "TITLE": "Loading forms..."
+    },
+    "ERROR": {
+      "TITLE": "Unable to load forms",
+      "DESCRIPTION": "An error occurred while loading the official forms."
     },
     "EMPTY": {
       "TITLE": "No forms found",
@@ -294,14 +310,14 @@
       "PHONE": "Phone",
       "EMAIL": "Email",
       "LOCATION": "Location",
-      "COUNTRY": "Lebanon ,Kafaat Main street , Mrayjeh Plaza  3rd Floor"
-  
+      "COUNTRY": "Lebanon, Kafaat Main Street, Mrayjeh Plaza, 3rd Floor"
     },
     "HOURS": {
       "TITLE": "Office Hours",
       "WEEKDAYS": "Monday – Friday",
-      "TIME": "10:00 AM – 1 PM | 3 PM - 6 PM"
-
+      "TIME": "10:00 AM – 1:00 PM | 3:00 PM – 6:00 PM",
+      "SATURDAY": "Saturday: By appointment",
+      "SUNDAY": "Sunday: Closed"
     },
     "BOTTOM": {
       "COPYRIGHT": "© 2026 ATWI Audit & Accounting. All rights reserved.",
