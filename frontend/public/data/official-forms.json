@@ -34,5 +34,18 @@
   "fileSize": "350 KB",
   "updatedAt": "2026",
   "downloadUrl": "/Taxes/Built-Property-Tax/built-property-tax.pdf"
+},
+
+{
+  "id": 1,
+  "titleEn": "Request to Remove the Treasury Lien Related to Betterment Tax",
+  "titleAr": "طلب رفع إشارة امتياز للخزينة بضريبة التحسين",
+  "descriptionEn": "Official Betterment Tax form.",
+  "descriptionAr": "نموذج رسمي خاص بضريبة التحسين.",
+  "category": "Betterment-Tax",
+  "fileName": "س1.pdf",
+  "fileSize": "PDF",
+  "updatedAt": "2026",
+  "downloadUrl": "/Taxes/Betterment-Tax/س1.pdf"
 }
 ]
