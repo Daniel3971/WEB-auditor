@@ -1,22 +1,63 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
-import { Careers } from './careers';
+@Component({
+  selector: 'app-careers',
+  imports: [
+    RouterLink,
+    TranslatePipe
+  ],
+  templateUrl: './careers.html',
+  styleUrl: './careers.css'
+})
+export class Careers {
+  selectedFileName = signal('');
+  fileError = signal('');
 
-describe('Careers', () => {
-  let component: Careers;
-  let fixture: ComponentFixture<Careers>;
+  constructor(private translate: TranslateService) {}
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Careers],
-    }).compileComponents();
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
 
-    fixture = TestBed.createComponent(Careers);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
-  });
+    this.selectedFileName.set('');
+    this.fileError.set('');
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    if (!file) {
+      return;
+    }
+
+    const maximumFileSize = 5 * 1024 * 1024;
+
+    const isPdf =
+      file.type === 'application/pdf' ||
+      file.name.toLowerCase().endsWith('.pdf');
+
+    if (!isPdf) {
+      this.fileError.set(
+        this.translate.instant('CAREERS.FORM.CV.PDF_ONLY_ERROR')
+      );
+
+      input.value = '';
+      return;
+    }
+
+    if (file.size > maximumFileSize) {
+      this.fileError.set(
+        this.translate.instant('CAREERS.FORM.CV.SIZE_ERROR')
+      );
+
+      input.value = '';
+      return;
+    }
+
+    this.selectedFileName.set(file.name);
+  }
+
+  removeSelectedFile(input: HTMLInputElement): void {
+    input.value = '';
+    this.selectedFileName.set('');
+    this.fileError.set('');
+  }
+}

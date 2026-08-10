@@ -6,7 +6,7 @@ import { Services } from './pages/services/services';
 import { Locations } from './pages/locations/locations';
 import { OfficialForms } from './pages/official-forms/official-forms';
 import { Careers } from './pages/careers/careers';
-import { Contact } from './pages/contact/contact';
+import { InternshipOffers } from './pages/internship-offers/internship-offers';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -15,6 +15,11 @@ export const routes: Routes = [
   { path: 'locations', component: Locations },
   { path: 'official-forms', component: OfficialForms },
   { path: 'careers', component: Careers },
-  { path: 'contact', component: Contact },
+  {
+    path: 'internship-offers',
+    component: InternshipOffers
+  },
+
+  // The wildcard route must always be last.
   { path: '**', redirectTo: '' }
 ];

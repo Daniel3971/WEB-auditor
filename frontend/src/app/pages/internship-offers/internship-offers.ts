@@ -1,21 +1,37 @@
 import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-careers',
+  selector: 'app-internship-offers',
   imports: [
-    RouterLink,
     TranslatePipe
   ],
-  templateUrl: './careers.html',
-  styleUrl: './careers.css'
+  templateUrl: './internship-offers.html',
+  styleUrl: './internship-offers.css'
 })
-export class Careers {
-  readonly offerAvailable = signal(true);
-
+export class InternshipOffers {
+  showApplicationForm = signal(false);
   selectedFileName = signal('');
   fileError = signal('');
+
+  openApplicationForm(): void {
+    this.showApplicationForm.set(true);
+
+    setTimeout(() => {
+      document
+        .getElementById('internship-application')
+        ?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+    });
+  }
+
+  closeApplicationForm(): void {
+    this.showApplicationForm.set(false);
+    this.selectedFileName.set('');
+    this.fileError.set('');
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -41,7 +57,10 @@ export class Careers {
     }
 
     if (file.size > maximumFileSize) {
-      this.fileError.set('The PDF file must be smaller than 5 MB.');
+      this.fileError.set(
+        'The PDF file must be smaller than 5 MB.'
+      );
+
       input.value = '';
       return;
     }

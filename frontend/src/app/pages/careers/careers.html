@@ -15,7 +15,46 @@
     </p>
   </div>
 </section>
+<section class="opportunities-section">
+  <div class="opportunities-content">
 
+    <h2>
+      {{ 'CAREERS.OPPORTUNITIES.TITLE' | translate }}
+    </h2>
+
+    <p class="opportunities-description">
+      {{ 'CAREERS.OPPORTUNITIES.DESCRIPTION' | translate }}
+    </p>
+
+    @if (offerAvailable()) {
+      <a
+        routerLink="/internship-offers"
+        class="opportunities-button"
+      >
+        {{ 'CAREERS.OPPORTUNITIES.BUTTON' | translate }}
+        <span>→</span>
+      </a>
+    } @else {
+      <button
+        type="button"
+        class="opportunities-button opportunities-button-closed"
+        disabled
+      >
+        {{ 'CAREERS.OPPORTUNITIES.CLOSED_BUTTON' | translate }}
+        <span>✕</span>
+      </button>
+    }
+
+  </div>
+
+  <div class="opportunities-image-wrapper">
+    <img
+      src="/opportunity_image.png"
+      alt="ATWI internship opportunities"
+      class="opportunities-image"
+    >
+  </div>
+</section>
 <section class="benefits-section">
   <div class="section-heading">
     <p>
@@ -92,228 +131,5 @@
   </div>
 </section>
 
-<section class="application-section">
-  <div class="application-information">
-    <p class="eyebrow">
-      {{ 'CAREERS.APPLICATION.EYEBROW' | translate }}
-    </p>
 
-    <h2>
-      {{ 'CAREERS.APPLICATION.TITLE' | translate }}
-    </h2>
 
-    <p class="application-description">
-      {{ 'CAREERS.APPLICATION.DESCRIPTION' | translate }}
-    </p>
-
-    <div class="application-notes">
-      <div class="note-item">
-        <span>✓</span>
-
-        <p>
-          {{ 'CAREERS.APPLICATION.NOTES.REQUIRED_FIELDS' | translate }}
-        </p>
-      </div>
-
-      <div class="note-item">
-        <span>✓</span>
-
-        <p>
-          {{ 'CAREERS.APPLICATION.NOTES.RECENT_CV' | translate }}
-        </p>
-      </div>
-
-      <div class="note-item">
-        <span>✓</span>
-
-        <p>
-          {{ 'CAREERS.APPLICATION.NOTES.PDF_LIMIT' | translate }}
-        </p>
-      </div>
-
-      <div class="note-item">
-        <span>✓</span>
-
-        <p>
-          {{ 'CAREERS.APPLICATION.NOTES.NO_GUARANTEE' | translate }}
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <form class="application-form">
-    <div class="form-row">
-      <div class="form-group">
-        <label for="firstName">
-          {{ 'CAREERS.FORM.FIRST_NAME.LABEL' | translate }}
-          <span>*</span>
-        </label>
-
-        <input
-          id="firstName"
-          name="firstName"
-          type="text"
-          [placeholder]="'CAREERS.FORM.FIRST_NAME.PLACEHOLDER' | translate"
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="lastName">
-          {{ 'CAREERS.FORM.LAST_NAME.LABEL' | translate }}
-          <span>*</span>
-        </label>
-
-        <input
-          id="lastName"
-          name="lastName"
-          type="text"
-          [placeholder]="'CAREERS.FORM.LAST_NAME.PLACEHOLDER' | translate"
-          required
-        >
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="email">
-          {{ 'CAREERS.FORM.EMAIL.LABEL' | translate }}
-          <span>*</span>
-        </label>
-
-        <input
-          id="email"
-          name="email"
-          type="email"
-          [placeholder]="'CAREERS.FORM.EMAIL.PLACEHOLDER' | translate"
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="phone">
-          {{ 'CAREERS.FORM.PHONE.LABEL' | translate }}
-          <span>*</span>
-        </label>
-
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          [placeholder]="'CAREERS.FORM.PHONE.PLACEHOLDER' | translate"
-          required
-        >
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="university">
-          {{ 'CAREERS.FORM.UNIVERSITY.LABEL' | translate }}
-        </label>
-
-        <input
-          id="university"
-          name="university"
-          type="text"
-          [placeholder]="'CAREERS.FORM.UNIVERSITY.PLACEHOLDER' | translate"
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="major">
-          {{ 'CAREERS.FORM.MAJOR.LABEL' | translate }}
-        </label>
-
-        <input
-          id="major"
-          name="major"
-          type="text"
-          [placeholder]="'CAREERS.FORM.MAJOR.PLACEHOLDER' | translate"
-        >
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="cv">
-        {{ 'CAREERS.FORM.CV.LABEL' | translate }}
-        <span>*</span>
-      </label>
-
-      <div class="file-input">
-        <input
-          #cvInput
-          id="cv"
-          name="cv"
-          type="file"
-          accept=".pdf,application/pdf"
-          required
-          (change)="onFileSelected($event)"
-        >
-
-        @if (selectedFileName()) {
-          <div class="selected-file">
-            <div class="selected-file-information">
-              <strong>
-                {{ 'CAREERS.FORM.CV.SELECTED_FILE' | translate }}
-              </strong>
-
-              <p>{{ selectedFileName() }}</p>
-            </div>
-
-            <button
-              type="button"
-              class="remove-file-button"
-              (click)="removeSelectedFile(cvInput)"
-            >
-              {{ 'CAREERS.FORM.CV.REMOVE' | translate }}
-            </button>
-          </div>
-        }
-
-        <p class="file-help">
-          {{ 'CAREERS.FORM.CV.HELP' | translate }}
-        </p>
-
-        @if (fileError()) {
-          <p class="file-error">
-            {{ fileError() }}
-          </p>
-        }
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="message">
-        {{ 'CAREERS.FORM.MESSAGE.LABEL' | translate }}
-      </label>
-
-      <textarea
-        id="message"
-        name="message"
-        rows="6"
-        [placeholder]="'CAREERS.FORM.MESSAGE.PLACEHOLDER' | translate"
-      ></textarea>
-    </div>
-
-    <label class="consent">
-      <input
-        type="checkbox"
-        name="consent"
-        required
-      >
-
-      <span>
-        {{ 'CAREERS.FORM.CONSENT' | translate }}
-      </span>
-    </label>
-
-    <button
-      type="submit"
-      class="submit-button"
-    >
-      {{ 'CAREERS.FORM.SUBMIT' | translate }}
-      <span>→</span>
-    </button>
-  </form>
-</section>

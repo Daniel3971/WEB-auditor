@@ -295,8 +295,63 @@
       },
       "CONSENT": "I confirm that the information provided is accurate and I agree that ATWI may review my application details.",
       "SUBMIT": "Submit Application"
-    }
+    },
+    "OPPORTUNITIES": {
+  "EYEBROW": "INTERNSHIP OPPORTUNITIES",
+  "TITLE": "Discover Our Available Internship Missions",
+  "DESCRIPTION": "Explore the available opportunities, understand each mission and find the internship that best matches your profile.",
+  "BUTTON": "View Opportunities",
+  "CLOSED_BUTTON": "No Opportunities Available",
+  "VISUAL_TITLE": "Learn and Grow with ATWI",
+  "VISUAL_TEXT": "Gain practical experience and develop your professional skills alongside our team."
+}
   },
+  
+  "INTERNSHIP_OFFERS": {
+  "HERO": {
+    "EYEBROW": "INTERNSHIP OPPORTUNITY",
+    "TITLE": "Accounting & Audit Internship",
+    "DESCRIPTION": "Join our team and gain valuable practical experience while working alongside accounting and auditing professionals."
+  },
+
+  "INTRO": {
+    "TITLE": "Launch Your Career with ATWI",
+    "PARAGRAPH_ONE": "ATWI Audit & Accounting offers internship opportunities for motivated university students and recent graduates who wish to gain practical experience in accounting, auditing, taxation and financial consulting.",
+    "PARAGRAPH_TWO": "Our internship program provides a professional environment where you will develop technical skills, work on real assignments and learn directly from experienced professionals."
+  },
+
+  "MISSION": {
+    "STATUS": "NOW ACCEPTING APPLICATIONS",
+    "TITLE": "Accounting & Audit Intern",
+    "TYPE": "Internship",
+
+    "ABOUT_TITLE": "About this Opportunity",
+    "ABOUT_TEXT": "As an Accounting & Audit Intern, you will assist our professional team in day-to-day accounting operations, audit engagements and financial reporting while building practical experience in a real business environment.",
+
+    "TASKS_TITLE": "Responsibilities",
+    "TASK_ONE": "Assist with bookkeeping and accounting records.",
+    "TASK_TWO": "Support audit engagements and financial documentation.",
+    "TASK_THREE": "Prepare reports and organize client files.",
+    "TASK_FOUR": "Collaborate with senior accountants and auditors.",
+
+    "PROFILE_TITLE": "Requirements",
+    "PROFILE_ONE": "Accounting, Finance or Business student.",
+    "PROFILE_TWO": "Basic knowledge of Microsoft Office.",
+    "PROFILE_THREE": "Strong communication and teamwork skills.",
+    "PROFILE_FOUR": "Motivated to learn and develop professionally.",
+
+    "DURATION_LABEL": "Duration",
+    "DURATION_VALUE": "2–3 Months",
+
+    "LOCATION_LABEL": "Location",
+    "LOCATION_VALUE": "Beirut, Lebanon",
+
+    "DEADLINE_LABEL": "Application Deadline",
+    "DEADLINE_VALUE": "Open Until Filled",
+
+    "APPLY_BUTTON": "Apply Now"
+  }
+},
 
   "FOOTER": {
     "BRAND": {

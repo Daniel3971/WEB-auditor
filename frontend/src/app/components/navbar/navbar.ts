@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  RouterLink,
+  RouterLinkActive
+} from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+
 import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
   imports: [
     RouterLink,
     RouterLinkActive,
@@ -15,5 +18,7 @@ import { LanguageService } from '../../services/language.service';
   styleUrl: './navbar.css'
 })
 export class Navbar {
-  constructor(public language: LanguageService) {}
+  constructor(
+    public language: LanguageService
+  ) {}
 }

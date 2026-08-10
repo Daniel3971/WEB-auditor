@@ -1,25 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+
+export type AppLanguage = 'en' | 'ar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
-  currentLanguage = 'en';
+  private readonly translate = inject(TranslateService);
 
-  constructor(private translate: TranslateService) {
+  currentLanguage: AppLanguage = 'en';
+
+  constructor() {
     const savedLanguage = localStorage.getItem('language');
 
-    const initialLanguage =
-      savedLanguage === 'ar' || savedLanguage === 'en'
-        ? savedLanguage
-        : 'en';
+    const initialLanguage: AppLanguage =
+      savedLanguage === 'ar' ? 'ar' : 'en';
 
-    this.translate.setFallbackLang('en');
-    this.setLanguage(initialLanguage);
+    this.changeLanguage(initialLanguage);
   }
 
-  setLanguage(language: 'en' | 'ar'): void {
+  changeLanguage(language: AppLanguage): void {
     this.currentLanguage = language;
 
     this.translate.use(language);
@@ -29,12 +30,5 @@ export class LanguageService {
     document.documentElement.lang = language;
     document.documentElement.dir =
       language === 'ar' ? 'rtl' : 'ltr';
-  }
-
-  toggleLanguage(): void {
-    const nextLanguage =
-      this.currentLanguage === 'en' ? 'ar' : 'en';
-
-    this.setLanguage(nextLanguage);
   }
 }

@@ -1,0 +1,497 @@
+:host {
+  display: block;
+  color: #12355f;
+}
+
+/* Hero */
+
+.offers-hero {
+  padding: 65px 7%;
+  background: linear-gradient(
+    135deg,
+    #fdfcf9 0%,
+    #f4f0e7 100%
+  );
+  border-bottom: 1px solid #ece6da;
+}
+
+.offers-hero-content {
+  max-width: 880px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #c9993a;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.offers-hero h1 {
+  max-width: 760px;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.gold-line {
+  width: 58px;
+  height: 3px;
+  margin: 24px 0;
+  background: #c9993a;
+}
+
+.offers-hero p:last-child {
+  max-width: 760px;
+  margin: 0;
+  color: #4d5863;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+/* Introduction */
+
+.offers-introduction {
+  padding: 65px 7% 30px;
+  background: #ffffff;
+}
+
+.introduction-content {
+  max-width: 820px;
+}
+
+.introduction-content h2 {
+  margin: 0 0 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.introduction-content p {
+  margin: 0 0 18px;
+  color: #4c5762;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+/* Mission */
+
+.mission-section {
+  padding: 35px 7% 75px;
+  background: #ffffff;
+}
+
+.mission-card {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 42px;
+  border: 1px solid #e0e4e8;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(16, 47, 89, 0.08);
+}
+
+.mission-header {
+  padding-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 25px;
+  border-bottom: 1px solid #e4e7ea;
+}
+
+.mission-status {
+  margin: 0 0 9px;
+  color: #3d8b53;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.mission-header h2 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 31px;
+  font-weight: 500;
+}
+
+.mission-badge {
+  padding: 9px 16px;
+  border-radius: 30px;
+  color: #12355f;
+  background: #edf3fb;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mission-description {
+  padding: 30px 0;
+  border-bottom: 1px solid #e4e7ea;
+}
+
+.mission-description h3,
+.mission-column h3 {
+  margin: 0 0 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.mission-description p {
+  max-width: 880px;
+  margin: 0;
+  color: #4f5a65;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.mission-grid {
+  padding: 30px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 45px;
+  border-bottom: 1px solid #e4e7ea;
+}
+
+.mission-column ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.mission-column li {
+  margin-bottom: 12px;
+  color: #4f5a65;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.mission-information {
+  padding: 28px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.mission-information div {
+  padding: 18px;
+  border-radius: 8px;
+  background: #f7f8fa;
+}
+
+.mission-information span {
+  display: block;
+  margin-bottom: 8px;
+  color: #74808c;
+  font-size: 13px;
+}
+
+.mission-information strong {
+  color: #12355f;
+  font-size: 15px;
+}
+
+.mission-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mission-action a {
+  min-width: 250px;
+  padding: 15px 25px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  border-radius: 7px;
+  color: #ffffff;
+  background: #12355f;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+
+.mission-action a:hover {
+  background: #0b2545;
+  transform: translateY(-2px);
+}
+/* Apply button */
+
+.mission-action button {
+  min-width: 250px;
+  padding: 15px 25px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  border: none;
+  border-radius: 7px;
+  color: #ffffff;
+  background: #12355f;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+
+.mission-action button:hover {
+  background: #0b2545;
+  transform: translateY(-2px);
+}
+
+/* Application section */
+
+.application-section {
+  max-width: 1050px;
+  margin: 0 auto 75px;
+  padding: 42px;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(16, 47, 89, 0.09);
+}
+
+.application-header {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.application-header h2 {
+  margin: 0 0 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 31px;
+  font-weight: 500;
+}
+
+.application-header p:last-child {
+  max-width: 700px;
+  margin: 0;
+  color: #55616c;
+  line-height: 1.7;
+}
+
+.close-application-button {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border: 1px solid #d5dbe1;
+  border-radius: 50%;
+  color: #12355f;
+  background: #ffffff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close-application-button:hover {
+  color: #ffffff;
+  background: #12355f;
+}
+
+.application-form {
+  padding: 32px;
+  border-radius: 10px;
+  background: #f7f8fa;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.form-group label {
+  color: #12355f;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.form-group label span {
+  color: #c9993a;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 15px;
+  box-sizing: border-box;
+  border: 1px solid #d9dde1;
+  border-radius: 7px;
+  outline: none;
+  color: #263442;
+  background: #ffffff;
+  font: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #c9993a;
+  box-shadow: 0 0 0 3px rgba(201, 153, 58, 0.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.file-input {
+  padding: 20px;
+  border: 2px dashed #d4c293;
+  border-radius: 8px;
+  background: #fffdf8;
+}
+
+.file-input > input {
+  padding: 10px;
+  border: none;
+  background: transparent;
+}
+
+.file-help {
+  margin: 12px 0 0;
+  color: #6a737c;
+  font-size: 13px;
+}
+
+.selected-file {
+  margin-top: 16px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #e1d4b2;
+  border-radius: 7px;
+  background: #ffffff;
+}
+
+.selected-file-information {
+  min-width: 0;
+}
+
+.selected-file-information strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.selected-file-information p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.remove-file-button {
+  padding: 9px 14px;
+  border: 1px solid #b84242;
+  border-radius: 6px;
+  color: #b84242;
+  background: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.remove-file-button:hover {
+  color: #ffffff;
+  background: #b84242;
+}
+
+.file-error {
+  margin: 10px 0 0;
+  color: #b84242;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.consent {
+  margin: 4px 0 25px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #535e68;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.consent input {
+  width: 17px;
+  height: 17px;
+  margin-top: 3px;
+  accent-color: #12355f;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 15px 24px;
+  border: none;
+  border-radius: 7px;
+  color: #ffffff;
+  background: #12355f;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background: #0b2545;
+}
+
+@media (max-width: 700px) {
+  .application-section {
+    margin-right: 5%;
+    margin-left: 5%;
+    padding: 28px 20px;
+  }
+
+  .application-header {
+    flex-direction: column-reverse;
+  }
+
+  .close-application-button {
+    align-self: flex-end;
+  }
+
+  .application-form {
+    padding: 24px 18px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-action button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 750px) {
+  .mission-card {
+    padding: 28px 22px;
+  }
+
+  .mission-header {
+    flex-direction: column;
+  }
+
+  .mission-grid,
+  .mission-information {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-action a {
+    width: 100%;
+  }
+}
