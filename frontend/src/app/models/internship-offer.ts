@@ -1,5 +1,3 @@
-export type InternshipStatus = 'OPEN' | 'CLOSED';
-
 export interface InternshipOffer {
   id: number;
 
@@ -21,5 +19,8 @@ export interface InternshipOffer {
   maxCandidates: number;
   currentCandidates: number;
 
-  status: InternshipStatus;
+  status: 'OPEN' | 'CLOSED';
+
+  createdAt?: string;
+  updatedAt?: string;
 }

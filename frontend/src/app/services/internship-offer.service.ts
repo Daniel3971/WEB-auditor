@@ -1,5 +1,5 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { InternshipOffer } from '../models/internship-offer';
@@ -8,18 +8,13 @@ import { InternshipOffer } from '../models/internship-offer';
   providedIn: 'root'
 })
 export class InternshipOfferService {
-  private readonly http = inject(HttpClient);
 
   private readonly apiUrl =
     'http://localhost:8080/api/internship-offers';
 
-  getOffers(): Observable<InternshipOffer[]> {
-    return this.http.get<InternshipOffer[]>(this.apiUrl);
-  }
+  constructor(private http: HttpClient) {}
 
-  getOfferById(id: number): Observable<InternshipOffer> {
-    return this.http.get<InternshipOffer>(
-      `${this.apiUrl}/${id}`
-    );
+  getAllOffers(): Observable<InternshipOffer[]> {
+    return this.http.get<InternshipOffer[]>(this.apiUrl);
   }
 }

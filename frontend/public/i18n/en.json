@@ -350,7 +350,40 @@
     "DEADLINE_VALUE": "Open Until Filled",
 
     "APPLY_BUTTON": "Apply Now"
-  }
+  },
+  "SEARCH": {
+  "PLACEHOLDER": "Search by title or keyword"
+},
+"FILTER": {
+  "ALL": "All Status"
+},
+"STATUS": {
+  "OPEN": "Open",
+  "CLOSED": "Closed"
+},
+"CARD": {
+  "DURATION": "Duration",
+  "DEADLINE": "Deadline",
+  "STATUS": "Status"
+},
+"EMPTY": {
+  "TITLE": "No internship opportunities found",
+  "DESCRIPTION": "There are currently no opportunities matching your search."
+},
+"FOOTER": {
+  "TITLE": "Don't find the right opportunity?",
+  "DESCRIPTION": "Keep checking this page. New internship missions are added regularly.",
+  "BUTTON": "Back to Careers"
+},
+"DETAILS": {
+  "ABOUT": "About this opportunity",
+  "MISSION": "Your Mission",
+  "PROFILE": "Profile",
+  "APPLY": "Apply Now",
+  "CLOSED": "Applications Closed"
+},
+"LOADING": "Loading internship opportunities...",
+"ERROR": "We couldn't load the internship opportunities. Please try again later."
 },
 
   "FOOTER": {

@@ -13,10 +13,10 @@ public class InternshipOffer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title_en", nullable = false)
+    @Column(name = "title_en", nullable = false, length = 200)
     private String titleEn;
 
-    @Column(name = "title_ar", nullable = false)
+    @Column(name = "title_ar", nullable = false, length = 200)
     private String titleAr;
 
     @Column(name = "description_en", nullable = false, columnDefinition = "TEXT")
@@ -25,10 +25,10 @@ public class InternshipOffer {
     @Column(name = "description_ar", nullable = false, columnDefinition = "TEXT")
     private String descriptionAr;
 
-    @Column(name = "mission_en", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "mission_en", columnDefinition = "TEXT")
     private String missionEn;
 
-    @Column(name = "mission_ar", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "mission_ar", columnDefinition = "TEXT")
     private String missionAr;
 
     @Column(name = "profile_en", columnDefinition = "TEXT")
@@ -37,6 +37,7 @@ public class InternshipOffer {
     @Column(name = "profile_ar", columnDefinition = "TEXT")
     private String profileAr;
 
+    @Column(length = 100)
     private String duration;
 
     @Column(name = "application_deadline")
@@ -52,29 +53,44 @@ public class InternshipOffer {
     @Column(nullable = false)
     private InternshipStatus status = InternshipStatus.OPEN;
 
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
     @PrePersist
-    public void onCreate() {
+    public void prePersist() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
-        updateStatus();
+
+        if (status == null) {
+            status = InternshipStatus.OPEN;
+        }
+
+        if (maxCandidates == null) {
+            maxCandidates = 50;
+        }
+
+        if (currentCandidates == null) {
+            currentCandidates = 0;
+        }
+
+        updateAutomaticStatus();
     }
 
     @PreUpdate
-    public void onUpdate() {
+    public void preUpdate() {
         updatedAt = LocalDateTime.now();
-        updateStatus();
+        updateAutomaticStatus();
     }
 
-    public void updateStatus() {
-        if (currentCandidates != null
-                && maxCandidates != null
-                && currentCandidates >= maxCandidates) {
+    private void updateAutomaticStatus() {
+        if (
+            maxCandidates != null &&
+            currentCandidates != null &&
+            currentCandidates >= maxCandidates
+        ) {
             status = InternshipStatus.CLOSED;
         }
     }
