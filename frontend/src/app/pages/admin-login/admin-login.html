@@ -1,0 +1,200 @@
+<div class="admin-login-page">
+
+  <div class="login-container">
+
+    <!-- LEFT SIDE -->
+
+    <section class="login-brand">
+
+      <a
+        href="/"
+        class="logo-link"
+      >
+        <img
+          src="/logo_Atwi.png"
+          alt="ATWI Audit & Accounting"
+          class="admin-logo"
+        >
+      </a>
+
+
+      <div class="brand-content">
+
+
+        <h1>
+          ATWI Audit
+          <br>
+          & Accounting
+        </h1>
+
+        <div class="gold-line"></div>
+
+    
+
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+
+    <section class="login-section">
+
+      <div class="login-form-container">
+
+        <div class="login-header">
+
+        
+
+          <h2>
+            Welcome back
+          </h2>
+
+
+        </div>
+
+
+        <form
+          class="login-form"
+          (ngSubmit)="login()"
+        >
+
+          <!-- USERNAME -->
+
+          <div class="form-group">
+
+            <label for="username">
+              Username
+            </label>
+
+            <input
+              id="username"
+              name="username"
+              type="text"
+              [(ngModel)]="username"
+              autocomplete="username"
+              placeholder="Enter your username"
+              required
+            >
+
+          </div>
+
+
+          <!-- PASSWORD -->
+
+          <div class="form-group">
+
+            <label for="password">
+              Password
+            </label>
+
+
+            <div class="password-input">
+
+              <input
+                id="password"
+                name="password"
+                [type]="showPassword() ? 'text' : 'password'"
+                [(ngModel)]="password"
+                autocomplete="current-password"
+                placeholder="Enter your password"
+                required
+              >
+
+
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="togglePassword()"
+                aria-label="Show or hide password"
+              >
+
+                @if (showPassword()) {
+                  Hide
+                } @else {
+                  Show
+                }
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- ERROR -->
+
+          @if (errorMessage()) {
+
+            <div class="login-error">
+
+              <span>!</span>
+
+              <p>
+                {{ errorMessage() }}
+              </p>
+
+            </div>
+
+          }
+
+
+          <!-- LOGIN BUTTON -->
+
+          <button
+            type="submit"
+            class="login-button"
+            [disabled]="loading()"
+          >
+
+            @if (loading()) {
+
+              <span>
+                Signing in...
+              </span>
+
+            } @else {
+
+              <span>
+                Sign In
+              </span>
+
+              <span class="arrow">
+                →
+              </span>
+
+            }
+
+          </button>
+
+        </form>
+
+
+        <div class="login-footer">
+
+          <div class="security-message">
+
+            <span class="lock">
+              🔒
+            </span>
+
+            <p>
+              Authorized personnel only
+            </p>
+
+          </div>
+
+
+          <a href="/">
+            ← Return to website
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>

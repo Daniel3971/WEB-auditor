@@ -1,0 +1,403 @@
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+
+    <div class="sidebar-brand">
+      <img
+        src="/logo_Atwi.png"
+        alt="ATWI"
+      >
+
+      <div>
+        <strong>ATWI</strong>
+        <span>Administration</span>
+      </div>
+    </div>
+
+
+    <nav class="sidebar-navigation">
+
+      <a routerLink="/admin/dashboard">
+        Dashboard
+      </a>
+
+      <div class="navigation-label">
+        INTERNSHIPS
+      </div>
+
+      <a routerLink="/admin/offers">
+        Internship Offers
+      </a>
+
+      <a
+        routerLink="/admin/offers/new"
+        class="active"
+      >
+        + Create Offer
+      </a>
+
+      <div class="navigation-label">
+        APPLICATIONS
+      </div>
+
+      <a routerLink="/admin/applications">
+        Applications
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+      <button
+        type="button"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <main class="admin-main">
+
+    <header class="page-header">
+
+      <div>
+        <p class="eyebrow">
+          INTERNSHIPS
+        </p>
+
+        <h1>
+          Create Internship Offer
+        </h1>
+
+        <p>
+          Add a new opportunity to the public careers website.
+        </p>
+      </div>
+
+
+      <a
+        routerLink="/admin/offers"
+        class="back-button"
+      >
+        ← Back to Offers
+      </a>
+
+    </header>
+
+
+    <form
+      class="offer-form"
+      (ngSubmit)="createOffer()"
+    >
+
+      <!-- ENGLISH -->
+
+      <section class="form-card">
+
+        <div class="form-card-header">
+
+          <div>
+            <span class="language-label">
+              EN
+            </span>
+
+            <h2>
+              English Content
+            </h2>
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Internship Title *
+          </label>
+
+          <input
+            type="text"
+            name="titleEn"
+            [(ngModel)]="titleEn"
+            maxlength="200"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Description *
+          </label>
+
+          <textarea
+            name="descriptionEn"
+            [(ngModel)]="descriptionEn"
+            rows="4"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Mission *
+          </label>
+
+          <textarea
+            name="missionEn"
+            [(ngModel)]="missionEn"
+            rows="6"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Candidate Profile *
+          </label>
+
+          <textarea
+            name="profileEn"
+            [(ngModel)]="profileEn"
+            rows="5"
+            required
+          ></textarea>
+
+        </div>
+
+      </section>
+
+
+      <!-- ARABIC -->
+
+      <section
+        class="form-card arabic-card"
+        dir="rtl"
+      >
+
+        <div class="form-card-header">
+
+          <div>
+            <span class="language-label">
+              AR
+            </span>
+
+            <h2>
+              المحتوى العربي
+            </h2>
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            عنوان التدريب *
+          </label>
+
+          <input
+            type="text"
+            name="titleAr"
+            [(ngModel)]="titleAr"
+            maxlength="200"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            الوصف *
+          </label>
+
+          <textarea
+            name="descriptionAr"
+            [(ngModel)]="descriptionAr"
+            rows="4"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            مهام التدريب *
+          </label>
+
+          <textarea
+            name="missionAr"
+            [(ngModel)]="missionAr"
+            rows="6"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            الملف المطلوب *
+          </label>
+
+          <textarea
+            name="profileAr"
+            [(ngModel)]="profileAr"
+            rows="5"
+            required
+          ></textarea>
+
+        </div>
+
+      </section>
+
+
+      <!-- SETTINGS -->
+
+      <section class="form-card">
+
+        <div class="form-card-header">
+          <h2>
+            Offer Settings
+          </h2>
+        </div>
+
+
+        <div class="settings-grid">
+
+          <div class="form-group">
+
+            <label>
+              Duration *
+            </label>
+
+            <input
+              type="text"
+              name="duration"
+              [(ngModel)]="duration"
+              placeholder="Example: 2-3 months"
+              maxlength="100"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Application Deadline *
+            </label>
+
+            <input
+              type="date"
+              name="applicationDeadline"
+              [(ngModel)]="applicationDeadline"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Maximum Candidates *
+            </label>
+
+            <input
+              type="number"
+              name="maxCandidates"
+              [(ngModel)]="maxCandidates"
+              min="1"
+              max="10000"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Status *
+            </label>
+
+            <select
+              name="status"
+              [(ngModel)]="status"
+            >
+              <option value="OPEN">
+                Open
+              </option>
+
+              <option value="CLOSED">
+                Closed
+              </option>
+            </select>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      @if (errorMessage()) {
+
+        <div class="form-error">
+          {{ errorMessage() }}
+        </div>
+
+      }
+
+
+      <div class="form-actions">
+
+        <a
+          routerLink="/admin/offers"
+          class="cancel-button"
+        >
+          Cancel
+        </a>
+
+
+        <button
+          type="submit"
+          class="save-button"
+          [disabled]="submitting()"
+        >
+
+          @if (submitting()) {
+            Creating...
+          } @else {
+            Create Internship Offer →
+          }
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </main>
+
+</div>

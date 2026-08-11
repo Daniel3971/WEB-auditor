@@ -1,6 +1,5 @@
 <section class="offers-hero">
   <div class="offers-hero-content">
-
     <p class="eyebrow">
       {{ 'INTERNSHIP_OFFERS.HERO.EYEBROW' | translate }}
     </p>
@@ -14,7 +13,6 @@
     <p>
       {{ 'INTERNSHIP_OFFERS.HERO.DESCRIPTION' | translate }}
     </p>
-
   </div>
 </section>
 
@@ -24,98 +22,61 @@
   <!-- SEARCH + FILTER -->
 
   <div class="offers-toolbar">
-
     <div class="search-box">
-
       <span>⌕</span>
 
       <input
         type="text"
-        [placeholder]="
-          'INTERNSHIP_OFFERS.SEARCH.PLACEHOLDER'
-            | translate
-        "
+        [placeholder]="'INTERNSHIP_OFFERS.SEARCH.PLACEHOLDER' | translate"
         [value]="searchTerm()"
         (input)="updateSearch($event)"
       >
-
     </div>
-
 
     <select
       class="status-filter"
       [value]="selectedStatus()"
       (change)="updateStatus($event)"
     >
-
       <option value="ALL">
-        {{
-          'INTERNSHIP_OFFERS.FILTER.ALL'
-            | translate
-        }}
+        {{ 'INTERNSHIP_OFFERS.FILTER.ALL' | translate }}
       </option>
 
       <option value="OPEN">
-        {{
-          'INTERNSHIP_OFFERS.STATUS.OPEN'
-            | translate
-        }}
+        {{ 'INTERNSHIP_OFFERS.STATUS.OPEN' | translate }}
       </option>
 
       <option value="CLOSED">
-        {{
-          'INTERNSHIP_OFFERS.STATUS.CLOSED'
-            | translate
-        }}
+        {{ 'INTERNSHIP_OFFERS.STATUS.CLOSED' | translate }}
       </option>
-
     </select>
-
   </div>
 
 
   <!-- LOADING -->
 
   @if (loading()) {
-
     <div class="state-message">
-
-      {{
-        'INTERNSHIP_OFFERS.LOADING'
-          | translate
-      }}
-
+      {{ 'INTERNSHIP_OFFERS.LOADING' | translate }}
     </div>
-
   }
 
 
   <!-- ERROR -->
 
   @else if (error()) {
-
     <div class="state-message error-message">
-
-      {{
-        'INTERNSHIP_OFFERS.ERROR'
-          | translate
-      }}
-
+      {{ 'INTERNSHIP_OFFERS.ERROR' | translate }}
     </div>
-
   }
 
 
   <!-- OFFERS -->
 
   @else {
-
     <div class="offers-list">
 
-      @for (
-        offer of filteredOffers;
-        track offer.id
-      ) {
+      @for (offer of filteredOffers; track offer.id) {
 
         <article
           class="offer-card"
@@ -129,7 +90,6 @@
 
 
           <div class="offer-main">
-
             <h2>
               {{ getTitle(offer) }}
             </h2>
@@ -137,77 +97,47 @@
             <p>
               {{ getDescription(offer) }}
             </p>
-
           </div>
 
 
           <div class="offer-meta">
 
             <div class="meta-item">
-
               <span>
-                {{
-                  'INTERNSHIP_OFFERS.CARD.DURATION'
-                    | translate
-                }}
+                {{ 'INTERNSHIP_OFFERS.CARD.DURATION' | translate }}
               </span>
 
               <strong>
                 {{ offer.duration }}
               </strong>
-
             </div>
 
 
             <div class="meta-item">
-
               <span>
-                {{
-                  'INTERNSHIP_OFFERS.CARD.DEADLINE'
-                    | translate
-                }}
+                {{ 'INTERNSHIP_OFFERS.CARD.DEADLINE' | translate }}
               </span>
 
               <strong>
-                {{
-                  offer.applicationDeadline
-                    | date:'dd MMM yyyy'
-                }}
+                {{ offer.applicationDeadline | date:'dd MMM yyyy' }}
               </strong>
-
             </div>
 
 
             <div class="meta-item">
-
               <span>
-                {{
-                  'INTERNSHIP_OFFERS.CARD.STATUS'
-                    | translate
-                }}
+                {{ 'INTERNSHIP_OFFERS.CARD.STATUS' | translate }}
               </span>
 
-
               @if (isAvailable(offer)) {
-
                 <strong class="status open">
-                  {{
-                    'INTERNSHIP_OFFERS.STATUS.OPEN'
-                      | translate
-                  }}
+                  {{ 'INTERNSHIP_OFFERS.STATUS.OPEN' | translate }}
                 </strong>
-
               } @else {
-
                 <strong class="status closed">
-                  {{
-                    'INTERNSHIP_OFFERS.STATUS.CLOSED'
-                      | translate
-                  }}
+                  {{ 'INTERNSHIP_OFFERS.STATUS.CLOSED' | translate }}
                 </strong>
-
               }
-
             </div>
 
           </div>
@@ -216,75 +146,46 @@
           <button
             type="button"
             class="offer-arrow"
-            (click)="
-              openOffer(offer);
-              $event.stopPropagation()
-            "
+            (click)="openOffer(offer); $event.stopPropagation()"
           >
             →
           </button>
 
         </article>
-
       }
 
       @empty {
-
         <div class="no-offers">
-
           <h3>
-            {{
-              'INTERNSHIP_OFFERS.EMPTY.TITLE'
-                | translate
-            }}
+            {{ 'INTERNSHIP_OFFERS.EMPTY.TITLE' | translate }}
           </h3>
 
           <p>
-            {{
-              'INTERNSHIP_OFFERS.EMPTY.DESCRIPTION'
-                | translate
-            }}
+            {{ 'INTERNSHIP_OFFERS.EMPTY.DESCRIPTION' | translate }}
           </p>
-
         </div>
-
       }
 
     </div>
-
   }
 
 
   <!-- BOTTOM MESSAGE -->
 
   <div class="offers-footer">
-
     <div>
-
       <strong>
-        {{
-          'INTERNSHIP_OFFERS.FOOTER.TITLE'
-            | translate
-        }}
+        {{ 'INTERNSHIP_OFFERS.FOOTER.TITLE' | translate }}
       </strong>
 
       <p>
-        {{
-          'INTERNSHIP_OFFERS.FOOTER.DESCRIPTION'
-            | translate
-        }}
+        {{ 'INTERNSHIP_OFFERS.FOOTER.DESCRIPTION' | translate }}
       </p>
-
     </div>
 
-
     <a routerLink="/careers">
-      {{
-        'INTERNSHIP_OFFERS.FOOTER.BUTTON'
-          | translate
-      }}
+      {{ 'INTERNSHIP_OFFERS.FOOTER.BUTTON' | translate }}
     </a>
-
   </div>
 
 </section>
@@ -292,13 +193,10 @@
 
 
 <!-- ========================================
-     SELECTED OFFER
+     SELECTED OFFER DETAILS
 ========================================= -->
 
-@if (
-  selectedOffer();
-  as offer
-) {
+@if (selectedOffer(); as offer) {
 
   <section
     id="offer-details"
@@ -307,31 +205,18 @@
 
     <article class="offer-details-card">
 
-
       <div class="details-header">
-
         <div>
 
           @if (isAvailable(offer)) {
-
             <p class="details-status open-text">
-              {{
-                'INTERNSHIP_OFFERS.STATUS.OPEN'
-                  | translate
-              }}
+              {{ 'INTERNSHIP_OFFERS.STATUS.OPEN' | translate }}
             </p>
-
           } @else {
-
             <p class="details-status closed-text">
-              {{
-                'INTERNSHIP_OFFERS.STATUS.CLOSED'
-                  | translate
-              }}
+              {{ 'INTERNSHIP_OFFERS.STATUS.CLOSED' | translate }}
             </p>
-
           }
-
 
           <h2>
             {{ getTitle(offer) }}
@@ -348,25 +233,19 @@
         >
           ×
         </button>
-
       </div>
 
 
       <!-- ABOUT -->
 
       <div class="details-description">
-
         <h3>
-          {{
-            'INTERNSHIP_OFFERS.DETAILS.ABOUT'
-              | translate
-          }}
+          {{ 'INTERNSHIP_OFFERS.DETAILS.ABOUT' | translate }}
         </h3>
 
         <p>
           {{ getDescription(offer) }}
         </p>
-
       </div>
 
 
@@ -375,34 +254,24 @@
       <div class="details-grid">
 
         <div>
-
           <h3>
-            {{
-              'INTERNSHIP_OFFERS.DETAILS.MISSION'
-                | translate
-            }}
+            {{ 'INTERNSHIP_OFFERS.DETAILS.MISSION' | translate }}
           </h3>
 
           <p>
             {{ getMission(offer) }}
           </p>
-
         </div>
 
 
         <div>
-
           <h3>
-            {{
-              'INTERNSHIP_OFFERS.DETAILS.PROFILE'
-                | translate
-            }}
+            {{ 'INTERNSHIP_OFFERS.DETAILS.PROFILE' | translate }}
           </h3>
 
           <p>
             {{ getProfile(offer) }}
           </p>
-
         </div>
 
       </div>
@@ -413,109 +282,66 @@
       <div class="details-information">
 
         <div>
-
           <span>
-            {{
-              'INTERNSHIP_OFFERS.CARD.DURATION'
-                | translate
-            }}
+            {{ 'INTERNSHIP_OFFERS.CARD.DURATION' | translate }}
           </span>
 
           <strong>
             {{ offer.duration }}
           </strong>
-
         </div>
 
 
         <div>
-
           <span>
-            {{
-              'INTERNSHIP_OFFERS.CARD.DEADLINE'
-                | translate
-            }}
+            {{ 'INTERNSHIP_OFFERS.CARD.DEADLINE' | translate }}
           </span>
 
           <strong>
-            {{
-              offer.applicationDeadline
-                | date:'dd MMM yyyy'
-            }}
+            {{ offer.applicationDeadline | date:'dd MMM yyyy' }}
           </strong>
-
         </div>
 
 
         <div>
-
           <span>
-            {{
-              'INTERNSHIP_OFFERS.CARD.STATUS'
-                | translate
-            }}
+            {{ 'INTERNSHIP_OFFERS.CARD.STATUS' | translate }}
           </span>
 
           @if (isAvailable(offer)) {
-
             <strong class="open-text">
-              {{
-                'INTERNSHIP_OFFERS.STATUS.OPEN'
-                  | translate
-              }}
+              {{ 'INTERNSHIP_OFFERS.STATUS.OPEN' | translate }}
             </strong>
-
           } @else {
-
             <strong class="closed-text">
-              {{
-                'INTERNSHIP_OFFERS.STATUS.CLOSED'
-                  | translate
-              }}
+              {{ 'INTERNSHIP_OFFERS.STATUS.CLOSED' | translate }}
             </strong>
-
           }
-
         </div>
 
       </div>
 
 
-      <!-- APPLY -->
+      <!-- APPLY BUTTON -->
 
       <div class="details-action">
 
         @if (isAvailable(offer)) {
-
           <button
             type="button"
             (click)="openApplicationForm()"
           >
-
-            {{
-              'INTERNSHIP_OFFERS.DETAILS.APPLY'
-                | translate
-            }}
-
+            {{ 'INTERNSHIP_OFFERS.DETAILS.APPLY' | translate }}
             <span>→</span>
-
           </button>
-
         } @else {
-
           <button
             type="button"
             disabled
             class="disabled-button"
           >
-
-            {{
-              'INTERNSHIP_OFFERS.DETAILS.CLOSED'
-                | translate
-            }}
-
+            {{ 'INTERNSHIP_OFFERS.DETAILS.CLOSED' | translate }}
           </button>
-
         }
 
       </div>
@@ -523,7 +349,6 @@
     </article>
 
   </section>
-
 }
 
 
@@ -548,36 +373,23 @@
     <div class="application-header">
 
       <div>
-
         <p class="eyebrow">
-          {{
-            'CAREERS.APPLICATION.EYEBROW'
-              | translate
-          }}
+          {{ 'CAREERS.APPLICATION.EYEBROW' | translate }}
         </p>
 
         <h2>
-          {{
-            'CAREERS.APPLICATION.TITLE'
-              | translate
-          }}
+          {{ 'CAREERS.APPLICATION.TITLE' | translate }}
         </h2>
 
         <p class="application-description">
-          {{
-            'CAREERS.APPLICATION.DESCRIPTION'
-              | translate
-          }}
+          {{ 'CAREERS.APPLICATION.DESCRIPTION' | translate }}
         </p>
 
         <p class="application-offer-name">
-
           <strong>
             {{ getTitle(offer) }}
           </strong>
-
         </p>
-
       </div>
 
 
@@ -595,7 +407,6 @@
 
     <div class="application-content">
 
-
       <!-- NOTES -->
 
       <div class="application-information">
@@ -603,58 +414,38 @@
         <div class="application-notes">
 
           <div class="note-item">
-
             <span>✓</span>
 
             <p>
-              {{
-                'CAREERS.APPLICATION.NOTES.REQUIRED_FIELDS'
-                  | translate
-              }}
+              {{ 'CAREERS.APPLICATION.NOTES.REQUIRED_FIELDS' | translate }}
             </p>
-
           </div>
 
 
           <div class="note-item">
-
             <span>✓</span>
 
             <p>
-              {{
-                'CAREERS.APPLICATION.NOTES.RECENT_CV'
-                  | translate
-              }}
+              {{ 'CAREERS.APPLICATION.NOTES.RECENT_CV' | translate }}
             </p>
-
           </div>
 
 
           <div class="note-item">
-
             <span>✓</span>
 
             <p>
-              {{
-                'CAREERS.APPLICATION.NOTES.PDF_LIMIT'
-                  | translate
-              }}
+              {{ 'CAREERS.APPLICATION.NOTES.PDF_LIMIT' | translate }}
             </p>
-
           </div>
 
 
           <div class="note-item">
-
             <span>✓</span>
 
             <p>
-              {{
-                'CAREERS.APPLICATION.NOTES.NO_GUARANTEE'
-                  | translate
-              }}
+              {{ 'CAREERS.APPLICATION.NOTES.NO_GUARANTEE' | translate }}
             </p>
-
           </div>
 
         </div>
@@ -662,75 +453,53 @@
       </div>
 
 
-      <!-- FORM -->
+      <!-- APPLICATION FORM -->
 
       <form
         #applicationForm
         class="application-form"
-        (submit)="
-          submitApplication(
-            applicationForm,
-            $event
-          )
-        "
+        (submit)="submitApplication(applicationForm, $event)"
       >
 
-
-        <!-- FIRST / LAST NAME -->
+        <!-- FIRST NAME / LAST NAME -->
 
         <div class="form-row">
 
           <div class="form-group">
-
             <label for="firstName">
-
-              {{
-                'CAREERS.FORM.FIRST_NAME.LABEL'
-                  | translate
-              }}
-
+              {{ 'CAREERS.FORM.FIRST_NAME.LABEL' | translate }}
               <span>*</span>
-
             </label>
 
             <input
               id="firstName"
               name="firstName"
               type="text"
-              [placeholder]="
-                'CAREERS.FORM.FIRST_NAME.PLACEHOLDER'
-                  | translate
-              "
+              minlength="2"
+              maxlength="100"
+              pattern="^[A-Za-zÀ-ÿ\u0600-\u06FF\s'-]{2,100}$"
+              [placeholder]="'CAREERS.FORM.FIRST_NAME.PLACEHOLDER' | translate"
               required
             >
-
           </div>
 
 
           <div class="form-group">
-
             <label for="lastName">
-
-              {{
-                'CAREERS.FORM.LAST_NAME.LABEL'
-                  | translate
-              }}
-
+              {{ 'CAREERS.FORM.LAST_NAME.LABEL' | translate }}
               <span>*</span>
-
             </label>
 
             <input
               id="lastName"
               name="lastName"
               type="text"
-              [placeholder]="
-                'CAREERS.FORM.LAST_NAME.PLACEHOLDER'
-                  | translate
-              "
+              minlength="2"
+              maxlength="100"
+              pattern="^[A-Za-zÀ-ÿ\u0600-\u06FF\s'-]{2,100}$"
+              [placeholder]="'CAREERS.FORM.LAST_NAME.PLACEHOLDER' | translate"
               required
             >
-
           </div>
 
         </div>
@@ -741,56 +510,40 @@
         <div class="form-row">
 
           <div class="form-group">
-
             <label for="email">
-
-              {{
-                'CAREERS.FORM.EMAIL.LABEL'
-                  | translate
-              }}
-
+              {{ 'CAREERS.FORM.EMAIL.LABEL' | translate }}
               <span>*</span>
-
             </label>
 
             <input
               id="email"
               name="email"
               type="email"
-              [placeholder]="
-                'CAREERS.FORM.EMAIL.PLACEHOLDER'
-                  | translate
-              "
+              maxlength="150"
+              autocomplete="email"
+              [placeholder]="'CAREERS.FORM.EMAIL.PLACEHOLDER' | translate"
               required
             >
-
           </div>
 
 
           <div class="form-group">
-
             <label for="phone">
-
-              {{
-                'CAREERS.FORM.PHONE.LABEL'
-                  | translate
-              }}
-
+              {{ 'CAREERS.FORM.PHONE.LABEL' | translate }}
               <span>*</span>
-
             </label>
 
             <input
               id="phone"
               name="phone"
               type="tel"
-              [placeholder]="
-                'CAREERS.FORM.PHONE.PLACEHOLDER'
-                  | translate
-              "
+              minlength="7"
+              maxlength="25"
+              pattern="^[0-9+()\s-]{7,25}$"
+              autocomplete="tel"
+              [placeholder]="'CAREERS.FORM.PHONE.PLACEHOLDER' | translate"
               required
             >
-
           </div>
 
         </div>
@@ -801,50 +554,32 @@
         <div class="form-row">
 
           <div class="form-group">
-
             <label for="university">
-
-              {{
-                'CAREERS.FORM.UNIVERSITY.LABEL'
-                  | translate
-              }}
-
+              {{ 'CAREERS.FORM.UNIVERSITY.LABEL' | translate }}
             </label>
 
             <input
               id="university"
               name="university"
               type="text"
-              [placeholder]="
-                'CAREERS.FORM.UNIVERSITY.PLACEHOLDER'
-                  | translate
-              "
+              maxlength="150"
+              [placeholder]="'CAREERS.FORM.UNIVERSITY.PLACEHOLDER' | translate"
             >
-
           </div>
 
 
           <div class="form-group">
-
             <label for="major">
-
-              {{
-                'CAREERS.FORM.MAJOR.LABEL'
-                  | translate
-              }}
-
+              {{ 'CAREERS.FORM.MAJOR.LABEL' | translate }}
             </label>
 
             <input
               id="major"
               name="major"
               type="text"
-              [placeholder]="
-                'CAREERS.FORM.MAJOR.PLACEHOLDER'
-                  | translate
-              "
+              maxlength="150"
+              [placeholder]="'CAREERS.FORM.MAJOR.PLACEHOLDER' | translate"
             >
-
           </div>
 
         </div>
@@ -855,14 +590,8 @@
         <div class="form-group">
 
           <label for="cv">
-
-            {{
-              'CAREERS.FORM.CV.LABEL'
-                | translate
-            }}
-
+            {{ 'CAREERS.FORM.CV.LABEL' | translate }}
             <span>*</span>
-
           </label>
 
 
@@ -884,59 +613,37 @@
               <div class="selected-file">
 
                 <div class="selected-file-information">
-
                   <strong>
-                    {{
-                      'CAREERS.FORM.CV.SELECTED_FILE'
-                        | translate
-                    }}
+                    {{ 'CAREERS.FORM.CV.SELECTED_FILE' | translate }}
                   </strong>
 
                   <p>
                     {{ selectedFileName() }}
                   </p>
-
                 </div>
 
 
                 <button
                   type="button"
                   class="remove-file-button"
-                  (click)="
-                    removeSelectedFile(
-                      cvInput
-                    )
-                  "
+                  (click)="removeSelectedFile(cvInput)"
                 >
-
-                  {{
-                    'CAREERS.FORM.CV.REMOVE'
-                      | translate
-                  }}
-
+                  {{ 'CAREERS.FORM.CV.REMOVE' | translate }}
                 </button>
 
               </div>
-
             }
 
 
             <p class="file-help">
-
-              {{
-                'CAREERS.FORM.CV.HELP'
-                  | translate
-              }}
-
+              {{ 'CAREERS.FORM.CV.HELP' | translate }}
             </p>
 
 
             @if (fileError()) {
-
               <p class="file-error">
                 {{ fileError() }}
               </p>
-
             }
 
           </div>
@@ -949,22 +656,15 @@
         <div class="form-group">
 
           <label for="message">
-
-            {{
-              'CAREERS.FORM.MESSAGE.LABEL'
-                | translate
-            }}
-
+            {{ 'CAREERS.FORM.MESSAGE.LABEL' | translate }}
           </label>
 
           <textarea
             id="message"
             name="message"
             rows="6"
-            [placeholder]="
-              'CAREERS.FORM.MESSAGE.PLACEHOLDER'
-                | translate
-            "
+            maxlength="1500"
+            [placeholder]="'CAREERS.FORM.MESSAGE.PLACEHOLDER' | translate"
           ></textarea>
 
         </div>
@@ -981,10 +681,7 @@
           >
 
           <span>
-            {{
-              'CAREERS.FORM.CONSENT'
-                | translate
-            }}
+            {{ 'CAREERS.FORM.CONSENT' | translate }}
           </span>
 
         </label>
@@ -993,24 +690,20 @@
         <!-- RESULT MESSAGES -->
 
         @if (submitSuccess()) {
-
           <p class="submit-success">
             Application submitted successfully.
           </p>
-
         }
 
 
         @if (submitError()) {
-
           <p class="submit-error">
             {{ submitError() }}
           </p>
-
         }
 
 
-        <!-- SUBMIT BUTTON -->
+        <!-- SUBMIT -->
 
         <button
           type="submit"
@@ -1019,20 +712,12 @@
         >
 
           @if (submitting()) {
-
             <span>
               Submitting...
             </span>
-
           } @else {
-
-            {{
-              'CAREERS.FORM.SUBMIT'
-                | translate
-            }}
-
+            {{ 'CAREERS.FORM.SUBMIT' | translate }}
             <span>→</span>
-
           }
 
         </button>
@@ -1042,5 +727,4 @@
     </div>
 
   </section>
-
 }

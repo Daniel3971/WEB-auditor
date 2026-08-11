@@ -1,0 +1,348 @@
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+
+  <aside class="admin-sidebar">
+
+    <div class="sidebar-brand">
+
+      <img
+        src="/logo_Atwi.png"
+        alt="ATWI Audit & Accounting"
+      >
+
+      <div>
+        <strong>ATWI</strong>
+        <span>Administration</span>
+      </div>
+
+    </div>
+
+
+    <nav class="sidebar-navigation">
+
+      <a
+        routerLink="/admin/dashboard"
+        class="active"
+      >
+        <span class="nav-icon">▦</span>
+
+        Dashboard
+      </a>
+
+
+      <div class="navigation-label">
+        INTERNSHIPS
+      </div>
+
+
+      <a routerLink="/admin/offers">
+        <span class="nav-icon">▤</span>
+
+        Internship Offers
+      </a>
+
+
+      <a routerLink="/admin/offers/new">
+        <span class="nav-icon">＋</span>
+
+        Create Offer
+      </a>
+
+
+      <div class="navigation-label">
+        APPLICATIONS
+      </div>
+
+
+      <a routerLink="/admin/applications">
+        <span class="nav-icon">◉</span>
+
+        Applications
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+      <button
+        type="button"
+        (click)="logout()"
+      >
+        <span>↪</span>
+
+        Logout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+
+  <!-- MAIN -->
+
+  <main class="admin-main">
+
+
+    <!-- HEADER -->
+
+    <header class="admin-header">
+
+      <div>
+
+        <p class="eyebrow">
+          ADMINISTRATION
+        </p>
+
+        <h1>
+          Dashboard
+        </h1>
+
+      </div>
+
+
+      <div class="admin-profile">
+
+        <div class="profile-circle">
+          {{ username().charAt(0).toUpperCase() }}
+        </div>
+
+        <div>
+          <strong>
+            {{ username() }}
+          </strong>
+
+          <span>
+            Administrator
+          </span>
+        </div>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome-card">
+
+      <div>
+
+        <p class="welcome-eyebrow">
+          ATWI ADMIN PORTAL
+        </p>
+
+        <h2>
+          Welcome back,
+          {{ username() }}
+        </h2>
+
+        <p>
+          Manage internship opportunities,
+          review candidate applications,
+          and keep your recruitment
+          information up to date.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- STATISTICS -->
+
+    <section class="statistics-grid">
+
+
+      <article class="stat-card">
+
+        <div class="stat-icon">
+          ▤
+        </div>
+
+        <div>
+          <span>
+            Total Offers
+          </span>
+
+          <strong>
+            {{ totalOffers() }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="stat-card">
+
+        <div class="stat-icon">
+          ✓
+        </div>
+
+        <div>
+          <span>
+            Open Offers
+          </span>
+
+          <strong>
+            {{ openOffers() }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="stat-card">
+
+        <div class="stat-icon">
+          ×
+        </div>
+
+        <div>
+          <span>
+            Closed Offers
+          </span>
+
+          <strong>
+            {{ closedOffers() }}
+          </strong>
+        </div>
+
+      </article>
+
+
+      <article class="stat-card">
+
+        <div class="stat-icon">
+          ◉
+        </div>
+
+        <div>
+          <span>
+            Applications
+          </span>
+
+          <strong>
+            —
+          </strong>
+        </div>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- QUICK ACTIONS -->
+
+    <section class="dashboard-section">
+
+      <div class="section-header">
+
+        <div>
+          <p class="section-eyebrow">
+            MANAGEMENT
+          </p>
+
+          <h2>
+            Quick Actions
+          </h2>
+        </div>
+
+      </div>
+
+
+      <div class="action-grid">
+
+
+        <a
+          routerLink="/admin/offers/new"
+          class="action-card"
+        >
+
+          <div class="action-icon">
+            ＋
+          </div>
+
+          <div>
+            <h3>
+              Create Internship Offer
+            </h3>
+
+            <p>
+              Add a new internship
+              opportunity to the website.
+            </p>
+          </div>
+
+          <span class="action-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          routerLink="/admin/offers"
+          class="action-card"
+        >
+
+          <div class="action-icon">
+            ▤
+          </div>
+
+          <div>
+            <h3>
+              Manage Offers
+            </h3>
+
+            <p>
+              Edit, open or close
+              existing opportunities.
+            </p>
+          </div>
+
+          <span class="action-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          routerLink="/admin/applications"
+          class="action-card"
+        >
+
+          <div class="action-icon">
+            ◉
+          </div>
+
+          <div>
+            <h3>
+              Review Applications
+            </h3>
+
+            <p>
+              View applicants and
+              manage their status.
+            </p>
+          </div>
+
+          <span class="action-arrow">
+            →
+          </span>
+
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

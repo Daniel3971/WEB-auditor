@@ -1,0 +1,263 @@
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+
+    <div class="sidebar-brand">
+
+      <img
+        src="/logo_Atwi.png"
+        alt="ATWI"
+      >
+
+      <div>
+        <strong>ATWI</strong>
+        <span>Administration</span>
+      </div>
+
+    </div>
+
+
+    <nav class="sidebar-navigation">
+
+      <a routerLink="/admin/dashboard">
+        Dashboard
+      </a>
+
+      <div class="navigation-label">
+        INTERNSHIPS
+      </div>
+
+      <a
+        routerLink="/admin/offers"
+        class="active"
+      >
+        Internship Offers
+      </a>
+
+      <a routerLink="/admin/offers/new">
+        + Create Offer
+      </a>
+
+      <div class="navigation-label">
+        APPLICATIONS
+      </div>
+
+      <a routerLink="/admin/applications">
+        Applications
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+      <button
+        type="button"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <main class="admin-main">
+
+    <header class="page-header">
+
+      <div>
+        <p class="eyebrow">
+          INTERNSHIPS
+        </p>
+
+        <h1>
+          Internship Offers
+        </h1>
+
+        <p>
+          Manage all internship opportunities published on the website.
+        </p>
+      </div>
+
+
+      <a
+        routerLink="/admin/offers/new"
+        class="create-button"
+      >
+        + Create Offer
+      </a>
+
+    </header>
+
+
+    <!-- FILTERS -->
+
+    <div class="offers-toolbar">
+
+      <input
+        type="search"
+        placeholder="Search internship offers..."
+        [value]="searchTerm()"
+        (input)="updateSearch($event)"
+      >
+
+
+      <select
+        [value]="statusFilter()"
+        (change)="updateFilter($event)"
+      >
+
+        <option value="ALL">
+          All Status
+        </option>
+
+        <option value="OPEN">
+          Open
+        </option>
+
+        <option value="CLOSED">
+          Closed
+        </option>
+
+      </select>
+
+    </div>
+
+
+    @if (errorMessage()) {
+
+      <div class="error-message">
+        {{ errorMessage() }}
+      </div>
+
+    }
+
+
+    @if (loading()) {
+
+      <div class="loading-state">
+        Loading offers...
+      </div>
+
+    } @else {
+
+      <div class="offers-table">
+
+        <div class="table-header">
+
+          <span>Internship</span>
+
+          <span>Duration</span>
+
+          <span>Candidates</span>
+
+          <span>Deadline</span>
+
+          <span>Status</span>
+
+          <span>Actions</span>
+
+        </div>
+
+
+        @for (
+          offer of filteredOffers;
+          track offer.id
+        ) {
+
+          <div class="offer-row">
+
+            <div class="offer-title">
+
+              <strong>
+                {{ offer.titleEn }}
+              </strong>
+
+              <span>
+                {{ offer.titleAr }}
+              </span>
+
+            </div>
+
+
+            <div>
+              {{ offer.duration }}
+            </div>
+
+
+            <div>
+              {{ offer.currentCandidates }}
+              /
+              {{ offer.maxCandidates }}
+            </div>
+
+
+            <div>
+              {{
+                offer.applicationDeadline
+                  | date:'dd MMM yyyy'
+              }}
+            </div>
+
+
+            <div>
+
+              <span
+                class="status-badge"
+                [class.open]="offer.status === 'OPEN'"
+                [class.closed]="offer.status === 'CLOSED'"
+              >
+                {{ offer.status }}
+              </span>
+
+            </div>
+
+
+            <div class="row-actions">
+
+  <a
+    [routerLink]="[
+      '/admin/offers',
+      offer.id,
+      'edit'
+    ]"
+    class="edit-button"
+  >
+    Edit
+  </a>
+
+  <button
+    type="button"
+    class="status-button"
+    (click)="toggleStatus(offer)"
+  >
+    @if (offer.status === 'OPEN') {
+      Close
+    } @else {
+      Reopen
+    }
+  </button>
+
+</div>
+
+          </div>
+
+        }
+
+        @empty {
+
+          <div class="empty-state">
+            No internship offers found.
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+  </main>
+
+</div>

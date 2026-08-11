@@ -1,0 +1,448 @@
+:host {
+  display: block;
+}
+
+.admin-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 265px 1fr;
+  background: #f5f7fa;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.admin-sidebar {
+  min-height: 100vh;
+  padding: 30px 22px;
+  display: flex;
+  flex-direction: column;
+  background: #102f59;
+  color: #ffffff;
+}
+
+.sidebar-brand {
+  padding: 0 8px 30px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-brand img {
+  width: 55px;
+  height: 55px;
+  padding: 5px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.sidebar-brand strong {
+  display: block;
+  font-size: 18px;
+}
+
+.sidebar-brand span {
+  display: block;
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+}
+
+.sidebar-navigation {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sidebar-navigation a {
+  min-height: 45px;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar-navigation a:hover,
+.sidebar-navigation a.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-navigation a.active {
+  border-left: 3px solid #c9993a;
+}
+
+.navigation-label {
+  margin: 24px 13px 8px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-bottom button {
+  width: 100%;
+  height: 43px;
+  padding: 0 13px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sidebar-bottom button:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.admin-main {
+  min-width: 0;
+  padding: 38px 45px 70px;
+}
+
+.page-header {
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.page-header .eyebrow {
+  margin: 0 0 6px;
+  color: #c9993a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  color: #102f59;
+  font-size: 32px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #758193;
+  font-size: 14px;
+}
+
+.create-button {
+  padding: 12px 18px;
+  border-radius: 7px;
+  background: #123b69;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.create-button:hover {
+  background: #0d2f57;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.offers-toolbar {
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  gap: 15px;
+}
+
+.offers-toolbar input,
+.offers-toolbar select {
+  height: 48px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  border: 1px solid #d8dee6;
+  border-radius: 7px;
+  outline: none;
+  background: #ffffff;
+  color: #26384d;
+  font-size: 13px;
+}
+
+.offers-toolbar input:focus,
+.offers-toolbar select:focus {
+  border-color: #174b82;
+  box-shadow: 0 0 0 3px rgba(23, 75, 130, 0.08);
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.offers-table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid #e0e5ec;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(16, 47, 89, 0.04);
+}
+
+.table-header,
+.offer-row {
+  width: 100%;
+  box-sizing: border-box;
+
+  display: grid;
+
+  /*
+    Important change:
+    Actions column is now 190px instead of 130px.
+  */
+  grid-template-columns:
+    minmax(260px, 1.8fr)
+    minmax(105px, 0.7fr)
+    minmax(105px, 0.7fr)
+    minmax(125px, 0.8fr)
+    minmax(95px, 0.6fr)
+    190px;
+
+  align-items: center;
+  column-gap: 12px;
+}
+
+.table-header {
+  min-height: 48px;
+  padding: 0 20px;
+  border-bottom: 1px solid #e5e9ee;
+  background: #f7f9fb;
+  color: #6f7d8e;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.offer-row {
+  min-height: 95px;
+  padding: 0 20px;
+  border-bottom: 1px solid #edf0f3;
+  color: #4d5d70;
+  font-size: 13px;
+}
+
+.offer-row:last-child {
+  border-bottom: none;
+}
+
+.offer-row:hover {
+  background: #fbfcfd;
+}
+
+/* Prevent grid children from forcing the row wider */
+.table-header > *,
+.offer-row > * {
+  min-width: 0;
+}
+
+/* =========================
+   OFFER TITLE
+========================= */
+
+.offer-title {
+  padding-right: 15px;
+  overflow: hidden;
+}
+
+.offer-title strong {
+  display: block;
+  margin-bottom: 5px;
+  overflow-wrap: anywhere;
+  color: #123a68;
+  font-size: 14px;
+}
+
+.offer-title span {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #7b8796;
+  font-size: 12px;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status-badge {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.status-badge.open {
+  color: #267343;
+  background: #e7f6eb;
+}
+
+.status-badge.closed {
+  color: #9a3c3c;
+  background: #f8e8e8;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.row-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.edit-button,
+.status-button {
+  min-width: 78px;
+  height: 36px;
+  padding: 0 12px;
+  box-sizing: border-box;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  white-space: nowrap;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.edit-button {
+  border: 1px solid #d5dde6;
+  background: #ffffff;
+  color: #354d68;
+  text-decoration: none;
+}
+
+.edit-button:hover {
+  border-color: #174b82;
+  color: #174b82;
+}
+
+.status-button {
+  border: 1px solid #174b82;
+  background: #ffffff;
+  color: #174b82;
+}
+
+.status-button:hover {
+  background: #174b82;
+  color: #ffffff;
+}
+
+/* =========================
+   STATES
+========================= */
+
+.loading-state,
+.empty-state {
+  padding: 50px 25px;
+  text-align: center;
+  color: #748194;
+  font-size: 14px;
+}
+
+.error-message {
+  margin-bottom: 15px;
+  padding: 12px 14px;
+  border: 1px solid #efcaca;
+  border-radius: 7px;
+  background: #fff5f5;
+  color: #a83838;
+  font-size: 13px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1250px) {
+
+  .table-header,
+  .offer-row {
+    min-width: 1050px;
+
+    grid-template-columns:
+      300px
+      120px
+      120px
+      145px
+      100px
+      190px;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    min-height: auto;
+  }
+
+  .sidebar-bottom {
+    margin-top: 30px;
+  }
+
+  .admin-main {
+    padding: 30px 22px;
+  }
+}
+
+@media (max-width: 650px) {
+
+  .page-header {
+    flex-direction: column;
+  }
+
+  .offers-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .create-button {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
