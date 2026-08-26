@@ -686,6 +686,16 @@
 
         </label>
 
+        @if (turnstileEnabled()) {
+          <div class="turnstile-verification">
+            <div #turnstileContainer></div>
+
+            @if (turnstileError()) {
+              <p class="file-error">{{ turnstileError() }}</p>
+            }
+          </div>
+        }
+
 
         <!-- RESULT MESSAGES -->
 
@@ -708,7 +718,7 @@
         <button
           type="submit"
           class="submit-button"
-          [disabled]="submitting()"
+          [disabled]="submitting() || !turnstileConfigLoaded()"
         >
 
           @if (submitting()) {

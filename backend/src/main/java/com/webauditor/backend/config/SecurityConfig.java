@@ -154,6 +154,7 @@ public class SecurityConfig {
                         HttpMethod.GET,
                         "/api/internship-offers/**",
                         "/api/services/**",
+                        "/api/turnstile/config",
                         "/api/hello"
                     )
                     .permitAll()

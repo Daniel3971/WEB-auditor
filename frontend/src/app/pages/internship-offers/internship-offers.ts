@@ -1,4 +1,11 @@
-import { Component, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  signal,
+  ViewChild
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -22,7 +29,10 @@ import { InternshipApplicationService } from '../../services/internship-applicat
   templateUrl: './internship-offers.html',
   styleUrl: './internship-offers.css'
 })
-export class InternshipOffers implements OnInit {
+export class InternshipOffers implements OnInit, OnDestroy {
+
+  @ViewChild('turnstileContainer')
+  private turnstileContainer?: ElementRef<HTMLDivElement>;
 
   /* =========================
      OFFERS
@@ -69,6 +79,18 @@ export class InternshipOffers implements OnInit {
 
   submitError = signal('');
 
+  turnstileConfigLoaded = signal(false);
+
+  turnstileEnabled = signal(false);
+
+  turnstileToken = signal('');
+
+  turnstileError = signal('');
+
+  private turnstileSiteKey = '';
+
+  private turnstileWidgetId?: string;
+
 
   /* =========================
      CONSTRUCTOR
@@ -87,6 +109,11 @@ export class InternshipOffers implements OnInit {
 
   ngOnInit(): void {
     this.loadOffers();
+    this.loadTurnstileConfig();
+  }
+
+  ngOnDestroy(): void {
+    this.removeTurnstileWidget();
   }
 
 
@@ -383,6 +410,8 @@ export class InternshipOffers implements OnInit {
 
     this.resetApplicationMessages();
 
+    this.renderTurnstileWhenReady();
+
     setTimeout(() => {
 
       document
@@ -407,6 +436,8 @@ export class InternshipOffers implements OnInit {
     this.showApplicationForm.set(false);
 
     this.clearSelectedFile();
+
+    this.removeTurnstileWidget();
 
     this.resetApplicationMessages();
   }
@@ -565,6 +596,13 @@ export class InternshipOffers implements OnInit {
       return;
     }
 
+    if (this.turnstileEnabled() && !this.turnstileToken()) {
+      this.turnstileError.set(
+        'Please complete the security verification.'
+      );
+      return;
+    }
+
 
     const formValues =
       new FormData(form);
@@ -636,7 +674,8 @@ export class InternshipOffers implements OnInit {
         university,
         major,
         message,
-        cv
+        cv,
+        this.turnstileToken()
       )
       .subscribe({
 
@@ -656,6 +695,8 @@ export class InternshipOffers implements OnInit {
           form.reset();
 
           this.clearSelectedFile();
+
+          this.resetTurnstileWidget();
 
           /*
            * Backend increments currentCandidates.
@@ -692,6 +733,8 @@ export class InternshipOffers implements OnInit {
               'Could not submit your application. Please try again.'
             );
           }
+
+          this.resetTurnstileWidget();
         }
 
       });
@@ -709,5 +752,129 @@ export class InternshipOffers implements OnInit {
     this.submitError.set('');
 
     this.fileError.set('');
+
+    this.turnstileError.set('');
+  }
+
+  private loadTurnstileConfig(): void {
+    this.internshipApplicationService.getTurnstileConfig().subscribe({
+      next: (config) => {
+        this.turnstileEnabled.set(config.enabled);
+        this.turnstileSiteKey = config.siteKey;
+        this.turnstileConfigLoaded.set(true);
+        this.renderTurnstileWhenReady();
+      },
+      error: () => {
+        // In production, a missing security configuration must not allow a
+        // submission. The submit button remains disabled.
+        this.turnstileConfigLoaded.set(false);
+        this.submitError.set(
+          'Security verification could not be loaded. Please refresh the page.'
+        );
+      }
+    });
+  }
+
+  private renderTurnstileWhenReady(): void {
+    if (
+      !this.showApplicationForm() ||
+      !this.turnstileEnabled() ||
+      !this.turnstileSiteKey
+    ) {
+      return;
+    }
+
+    setTimeout(() => this.renderTurnstile(), 0);
+  }
+
+  private renderTurnstile(): void {
+    if (this.turnstileWidgetId || !this.turnstileContainer) {
+      return;
+    }
+
+    this.loadTurnstileScript()
+      .then(() => {
+        const turnstile = window.turnstile;
+
+        if (!this.turnstileContainer || this.turnstileWidgetId || !turnstile) {
+          return;
+        }
+
+        this.turnstileWidgetId = turnstile.render(
+          this.turnstileContainer.nativeElement,
+          {
+            sitekey: this.turnstileSiteKey,
+            action: 'internship_application',
+            callback: (token: string) => {
+              this.turnstileToken.set(token);
+              this.turnstileError.set('');
+            },
+            'expired-callback': () => this.turnstileToken.set(''),
+            'error-callback': () => {
+              this.turnstileToken.set('');
+              this.turnstileError.set(
+                'Security verification could not be completed. Please refresh the page.'
+              );
+            }
+          }
+        );
+      })
+      .catch(() => {
+        this.turnstileError.set(
+          'Security verification could not be loaded. Please refresh the page.'
+        );
+      });
+  }
+
+  private loadTurnstileScript(): Promise<void> {
+    if (window.turnstile) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      const existingScript = document.getElementById('cloudflare-turnstile');
+      if (existingScript) {
+        existingScript.addEventListener('load', () => resolve(), { once: true });
+        existingScript.addEventListener('error', () => reject(), { once: true });
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.id = 'cloudflare-turnstile';
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject();
+      document.head.appendChild(script);
+    });
+  }
+
+  private resetTurnstileWidget(): void {
+    this.turnstileToken.set('');
+    if (this.turnstileWidgetId) {
+      window.turnstile?.reset(this.turnstileWidgetId);
+    }
+  }
+
+  private removeTurnstileWidget(): void {
+    this.turnstileToken.set('');
+    if (this.turnstileWidgetId) {
+      window.turnstile?.remove(this.turnstileWidgetId);
+      this.turnstileWidgetId = undefined;
+    }
+  }
+}
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        container: HTMLElement,
+        options: Record<string, unknown>
+      ) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
   }
 }

@@ -14,6 +14,10 @@ export class InternshipApplicationService {
     private http: HttpClient
   ) {}
 
+  getTurnstileConfig(): Observable<TurnstileConfig> {
+    return this.http.get<TurnstileConfig>('/api/turnstile/config');
+  }
+
   submitApplication(
     offerId: number,
     firstName: string,
@@ -23,7 +27,8 @@ export class InternshipApplicationService {
     university: string,
     major: string,
     message: string,
-    cv: File
+    cv: File,
+    turnstileToken: string
   ): Observable<number> {
 
     const formData = new FormData();
@@ -73,9 +78,18 @@ export class InternshipApplicationService {
       cv
     );
 
+    if (turnstileToken) {
+      formData.append('turnstileToken', turnstileToken);
+    }
+
     return this.http.post<number>(
       this.apiUrl,
       formData
     );
   }
+}
+
+export interface TurnstileConfig {
+  enabled: boolean;
+  siteKey: string;
 }
