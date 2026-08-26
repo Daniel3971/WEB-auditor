@@ -60,6 +60,9 @@ export class AdminOffers
   statusFilter =
     signal('ALL');
 
+  viewingArchived =
+    signal(false);
+
 
   constructor(
     private offerService:
@@ -85,8 +88,11 @@ export class AdminOffers
     this.errorMessage.set('');
 
 
-    this.offerService
-      .getAllOffers()
+    const request = this.viewingArchived()
+      ? this.offerService.getArchivedOffers()
+      : this.offerService.getAllOffers();
+
+    request
       .subscribe({
 
         next: offers => {
@@ -111,6 +117,24 @@ export class AdminOffers
         }
 
       });
+  }
+
+  showActiveOffers(): void {
+    if (!this.viewingArchived()) return;
+    this.viewingArchived.set(false);
+    this.clearFiltersAndReload();
+  }
+
+  showArchivedOffers(): void {
+    if (this.viewingArchived()) return;
+    this.viewingArchived.set(true);
+    this.clearFiltersAndReload();
+  }
+
+  private clearFiltersAndReload(): void {
+    this.searchTerm.set('');
+    this.statusFilter.set('ALL');
+    this.loadOffers();
   }
 
 
@@ -221,6 +245,73 @@ export class AdminOffers
         }
 
       });
+  }
+
+  removeOffer(offer: InternshipOffer): void {
+    const confirmed = window.confirm(
+      `Remove "${offer.titleEn}"? The offer will disappear from the website, but its applications will be preserved.`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.errorMessage.set('');
+
+    this.offerService.removeOffer(offer.id).subscribe({
+      next: () => {
+        this.offers.update(offers =>
+          offers.filter(current => current.id !== offer.id)
+        );
+      },
+      error: error => {
+        this.errorMessage.set(
+          error?.error?.message || 'Could not remove the internship offer.'
+        );
+      }
+    });
+  }
+
+  restoreOffer(offer: InternshipOffer): void {
+    this.errorMessage.set('');
+
+    this.offerService.restoreOffer(offer.id).subscribe({
+      next: () => {
+        this.offers.update(offers =>
+          offers.filter(current => current.id !== offer.id)
+        );
+      },
+      error: error => {
+        this.errorMessage.set(
+          error?.error?.message || 'Could not restore the internship offer.'
+        );
+      }
+    });
+  }
+
+  permanentlyDeleteOffer(offer: InternshipOffer): void {
+    const confirmed = window.confirm(
+      `Permanently delete "${offer.titleEn}"? This cannot be undone. Offers with applicants cannot be deleted.`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.errorMessage.set('');
+
+    this.offerService.permanentlyDeleteOffer(offer.id).subscribe({
+      next: () => {
+        this.offers.update(offers =>
+          offers.filter(current => current.id !== offer.id)
+        );
+      },
+      error: error => {
+        this.errorMessage.set(
+          error?.error?.message || 'Could not permanently delete the internship offer.'
+        );
+      }
+    });
   }
 
 

@@ -49,7 +49,7 @@ export interface AdminInternshipOfferRequest {
 export class AdminInternshipOfferService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/admin/internship-offers';
+    '/api/admin/internship-offers';
 
 
   constructor(
@@ -124,6 +124,35 @@ export class AdminInternshipOfferService {
       {
         withCredentials: true
       }
+    );
+  }
+
+  getArchivedOffers(): Observable<InternshipOffer[]> {
+    return this.http.get<InternshipOffer[]>(
+      `${this.apiUrl}/archived`,
+      { withCredentials: true }
+    );
+  }
+
+  removeOffer(id: number): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(
+      `${this.apiUrl}/${id}`,
+      { withCredentials: true }
+    );
+  }
+
+  restoreOffer(id: number): Observable<InternshipOffer> {
+    return this.http.patch<InternshipOffer>(
+      `${this.apiUrl}/${id}/restore`,
+      {},
+      { withCredentials: true }
+    );
+  }
+
+  permanentlyDeleteOffer(id: number): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(
+      `${this.apiUrl}/${id}/permanent`,
+      { withCredentials: true }
     );
   }
 }

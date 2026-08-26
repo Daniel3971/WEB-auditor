@@ -164,6 +164,28 @@
   background: #0d2f57;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.archive-button {
+  padding: 11px 16px;
+  border: 1px solid #cbd5df;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #294c70;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.archive-button:hover {
+  border-color: #174b82;
+  color: #174b82;
+}
+
 /* =========================
    TOOLBAR
 ========================= */
@@ -217,7 +239,7 @@
 
   /*
     Important change:
-    Actions column is now 190px instead of 130px.
+    Actions column fits Edit, Close/Reopen, and Remove.
   */
   grid-template-columns:
     minmax(260px, 1.8fr)
@@ -225,7 +247,7 @@
     minmax(105px, 0.7fr)
     minmax(125px, 0.8fr)
     minmax(95px, 0.6fr)
-    190px;
+    270px;
 
   align-items: center;
   column-gap: 12px;
@@ -326,7 +348,10 @@
 }
 
 .edit-button,
-.status-button {
+.status-button,
+.remove-button,
+.restore-button,
+.permanent-delete-button {
   min-width: 78px;
   height: 36px;
   padding: 0 12px;
@@ -369,6 +394,41 @@
   color: #ffffff;
 }
 
+.remove-button {
+  border: 1px solid #d9a9a9;
+  background: #ffffff;
+  color: #9a3c3c;
+}
+
+.remove-button:hover {
+  border-color: #9a3c3c;
+  background: #9a3c3c;
+  color: #ffffff;
+}
+
+.restore-button {
+  border: 1px solid #267343;
+  background: #ffffff;
+  color: #267343;
+}
+
+.restore-button:hover {
+  background: #267343;
+  color: #ffffff;
+}
+
+.permanent-delete-button {
+  min-width: 130px;
+  border: 1px solid #a72f2f;
+  background: #a72f2f;
+  color: #ffffff;
+}
+
+.permanent-delete-button:hover {
+  background: #842525;
+  border-color: #842525;
+}
+
 /* =========================
    STATES
 ========================= */
@@ -399,7 +459,7 @@
 
   .table-header,
   .offer-row {
-    min-width: 1050px;
+    min-width: 1130px;
 
     grid-template-columns:
       300px
@@ -407,7 +467,7 @@
       120px
       145px
       100px
-      190px;
+      270px;
   }
 }
 
@@ -444,5 +504,15 @@
     width: 100%;
     box-sizing: border-box;
     text-align: center;
+  }
+
+  .header-actions {
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .archive-button {
+    width: 100%;
   }
 }

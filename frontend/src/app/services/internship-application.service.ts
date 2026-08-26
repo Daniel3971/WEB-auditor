@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class InternshipApplicationService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/internship-applications';
+    '/api/internship-applications';
 
   constructor(
     private http: HttpClient

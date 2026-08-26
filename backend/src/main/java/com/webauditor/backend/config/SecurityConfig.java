@@ -4,6 +4,7 @@ import com.webauditor.backend.CompanyService.AdminUserDetailsService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -11,11 +12,22 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.http.HttpMethod;
 
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy;
 
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -27,6 +39,12 @@ import java.util.List;
 
 @Configuration
 public class SecurityConfig {
+
+    @Value("${app.security.secure-cookie:false}")
+    private boolean secureCookie;
+
+    @Value("${app.security.frontend-origin:http://localhost:4200}")
+    private String frontendOrigin;
 
 
     /* =========================
@@ -87,7 +105,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(
         HttpSecurity http,
-        DaoAuthenticationProvider provider
+        DaoAuthenticationProvider provider,
+        CookieCsrfTokenRepository csrfTokenRepository,
+        SessionRegistry sessionRegistry
     ) throws Exception {
 
         http
@@ -108,19 +128,13 @@ public class SecurityConfig {
             .cors(cors -> {})
 
 
-            /* =========================
-               CSRF
-
-               TEMPORARILY disabled.
-
-               We will enable it after
-               Angular XSRF support is
-               configured correctly.
-            ========================= */
-
-            .csrf(
-                csrf ->
-                    csrf.disable()
+            .csrf(csrf -> csrf
+                .csrfTokenRepository(csrfTokenRepository)
+                .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
+                .ignoringRequestMatchers(request ->
+                    "POST".equals(request.getMethod()) &&
+                    "/api/internship-applications".equals(request.getRequestURI())
+                )
             )
 
 
@@ -137,7 +151,10 @@ public class SecurityConfig {
                     ===================== */
 
                     .requestMatchers(
-                        "/api/internship-offers/**"
+                        HttpMethod.GET,
+                        "/api/internship-offers/**",
+                        "/api/services/**",
+                        "/api/hello"
                     )
                     .permitAll()
 
@@ -153,6 +170,7 @@ public class SecurityConfig {
                     ===================== */
 
                     .requestMatchers(
+                        HttpMethod.POST,
                         "/api/internship-applications"
                     )
                     .permitAll()
@@ -165,7 +183,9 @@ public class SecurityConfig {
                     .requestMatchers(
                         "/api/auth/login",
                         "/api/auth/logout",
-                        "/api/auth/me"
+                        "/api/auth/me",
+                        "/api/auth/csrf",
+                        "/error"
                     )
                     .permitAll()
 
@@ -192,7 +212,7 @@ public class SecurityConfig {
                     ===================== */
 
                     .anyRequest()
-                    .permitAll()
+                    .authenticated()
             )
 
 
@@ -201,13 +221,56 @@ public class SecurityConfig {
             ========================= */
 
             .sessionManagement(
-                session ->
+                    session ->
                     session
                         .maximumSessions(1)
+                        .sessionRegistry(sessionRegistry)
             );
 
 
         return http.build();
+    }
+
+    @Bean
+    public CookieCsrfTokenRepository csrfTokenRepository() {
+        CookieCsrfTokenRepository repository =
+            CookieCsrfTokenRepository.withHttpOnlyFalse();
+
+        repository.setCookieCustomizer(cookie -> cookie
+            .path("/")
+            .sameSite("Lax")
+            .secure(secureCookie)
+        );
+
+        return repository;
+    }
+
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    @Bean
+    public SessionAuthenticationStrategy sessionAuthenticationStrategy(
+        SessionRegistry sessionRegistry
+    ) {
+        ConcurrentSessionControlAuthenticationStrategy concurrent =
+            new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry);
+        concurrent.setMaximumSessions(1);
+        concurrent.setExceptionIfMaximumExceeded(false);
+
+        return new CompositeSessionAuthenticationStrategy(
+            List.of(
+                concurrent,
+                new SessionFixationProtectionStrategy(),
+                new RegisterSessionAuthenticationStrategy(sessionRegistry)
+            )
+        );
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
     }
 
 
@@ -229,7 +292,7 @@ public class SecurityConfig {
 
         configuration.setAllowedOrigins(
             List.of(
-                "http://localhost:4200"
+                frontendOrigin
             )
         );
 

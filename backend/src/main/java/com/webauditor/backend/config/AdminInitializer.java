@@ -8,9 +8,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Configuration
 public class AdminInitializer {
+
+    private static final Logger log = LoggerFactory.getLogger(AdminInitializer.class);
 
     @Bean
     CommandLineRunner createInitialAdmin(
@@ -36,9 +40,7 @@ public class AdminInitializer {
                 password == null
             ) {
 
-                System.out.println(
-                    "ADMIN ENVIRONMENT VARIABLES ARE MISSING"
-                );
+                log.warn("Initial admin environment variables are missing; no admin was created.");
 
                 return;
             }
@@ -54,39 +56,7 @@ public class AdminInitializer {
 
             if (existingAdmin.isPresent()) {
 
-                AdminUser admin =
-                    existingAdmin.get();
-
-
-                boolean passwordMatches =
-                    passwordEncoder.matches(
-                        password,
-                        admin.getPasswordHash()
-                    );
-
-
-                System.out.println(
-                    "================================"
-                );
-
-                System.out.println(
-                    "ADMIN USER FOUND: "
-                    + admin.getUsername()
-                );
-
-                System.out.println(
-                    "ADMIN ENABLED: "
-                    + admin.isEnabled()
-                );
-
-                System.out.println(
-                    "ADMIN PASSWORD MATCHES: "
-                    + passwordMatches
-                );
-
-                System.out.println(
-                    "================================"
-                );
+                log.info("Initial admin account already exists.");
 
 
                 return;
@@ -133,22 +103,7 @@ public class AdminInitializer {
             );
 
 
-            System.out.println(
-                "================================"
-            );
-
-            System.out.println(
-                "INITIAL ADMIN CREATED"
-            );
-
-            System.out.println(
-                "USERNAME: "
-                + username
-            );
-
-            System.out.println(
-                "================================"
-            );
+            log.info("Initial admin account created.");
         };
     }
 }

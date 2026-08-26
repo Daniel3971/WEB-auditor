@@ -3,6 +3,10 @@ package com.webauditor.backend.controller;
 import com.webauditor.backend.entity.InternshipOffer;
 import com.webauditor.backend.entity.InternshipStatus;
 import com.webauditor.backend.repository.InternshipOfferRepository;
+import com.webauditor.backend.repository.InternshipApplicationRepository;
+import com.webauditor.backend.CompanyService.AdminAuditService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.Authentication;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +23,24 @@ public class AdminInternshipOfferController {
     private final InternshipOfferRepository
         internshipOfferRepository;
 
+    private final InternshipApplicationRepository
+        internshipApplicationRepository;
+
+    private final AdminAuditService auditService;
+
 
     public AdminInternshipOfferController(
-        InternshipOfferRepository internshipOfferRepository
+        InternshipOfferRepository internshipOfferRepository,
+        InternshipApplicationRepository internshipApplicationRepository,
+        AdminAuditService auditService
     ) {
         this.internshipOfferRepository =
             internshipOfferRepository;
+
+        this.internshipApplicationRepository =
+            internshipApplicationRepository;
+
+        this.auditService = auditService;
     }
 
 
@@ -36,7 +52,95 @@ public class AdminInternshipOfferController {
     public List<InternshipOffer> getAllOffers() {
 
         return internshipOfferRepository
-            .findAll();
+            .findByArchivedFalse();
+    }
+
+    @GetMapping("/archived")
+    public List<InternshipOffer> getArchivedOffers() {
+        return internshipOfferRepository.findByArchivedTrue();
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> archiveOffer(
+        @PathVariable Long id,
+        Authentication authentication,
+        HttpServletRequest servletRequest
+    ) {
+        InternshipOffer offer = internshipOfferRepository
+            .findByIdAndArchivedFalse(id)
+            .orElse(null);
+
+        if (offer == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        offer.setStatus(InternshipStatus.CLOSED);
+        offer.setArchived(true);
+        internshipOfferRepository.save(offer);
+        auditService.record(authentication, servletRequest, "OFFER_ARCHIVED", "INTERNSHIP_OFFER", id, offer.getTitleEn());
+
+        return ResponseEntity.ok(
+            Map.of("message", "Internship offer removed successfully.")
+        );
+    }
+
+    @PatchMapping("/{id}/restore")
+    public ResponseEntity<?> restoreOffer(
+        @PathVariable Long id,
+        Authentication authentication,
+        HttpServletRequest servletRequest
+    ) {
+        InternshipOffer offer = internshipOfferRepository
+            .findById(id)
+            .orElse(null);
+
+        if (offer == null || !offer.isArchived()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        offer.setArchived(false);
+        offer.setStatus(InternshipStatus.CLOSED);
+
+        InternshipOffer saved = internshipOfferRepository.save(offer);
+        auditService.record(authentication, servletRequest, "OFFER_RESTORED", "INTERNSHIP_OFFER", id, offer.getTitleEn());
+        return ResponseEntity.ok(saved);
+    }
+
+    @DeleteMapping("/{id}/permanent")
+    public ResponseEntity<?> permanentlyDeleteOffer(
+        @PathVariable Long id,
+        Authentication authentication,
+        HttpServletRequest servletRequest
+    ) {
+        InternshipOffer offer = internshipOfferRepository
+            .findById(id)
+            .orElse(null);
+
+        if (offer == null || !offer.isArchived()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        long applicationCount = internshipApplicationRepository
+            .countByInternshipOfferId(id);
+
+        if (applicationCount > 0) {
+            return ResponseEntity.badRequest().body(
+                Map.of(
+                    "message",
+                    "This offer cannot be permanently deleted because it has "
+                        + applicationCount
+                        + (applicationCount == 1 ? " applicant." : " applicants.")
+                )
+            );
+        }
+
+        internshipOfferRepository.delete(offer);
+        auditService.record(authentication, servletRequest, "OFFER_PERMANENTLY_DELETED", "INTERNSHIP_OFFER", id, offer.getTitleEn());
+
+        return ResponseEntity.ok(
+            Map.of("message", "Internship offer permanently deleted.")
+        );
     }
 
 
@@ -50,7 +154,7 @@ public class AdminInternshipOfferController {
     ) {
 
         return internshipOfferRepository
-            .findById(id)
+            .findByIdAndArchivedFalse(id)
             .<ResponseEntity<?>>map(
                 ResponseEntity::ok
             )
@@ -69,7 +173,9 @@ public class AdminInternshipOfferController {
 
     @PostMapping
     public ResponseEntity<?> createOffer(
-        @RequestBody InternshipOfferRequest request
+        @RequestBody InternshipOfferRequest request,
+        Authentication authentication,
+        HttpServletRequest servletRequest
     ) {
 
         String validationError =
@@ -85,6 +191,19 @@ public class AdminInternshipOfferController {
                         validationError
                     )
                 );
+        }
+
+        InternshipStatus requestedStatus = request.status() == null
+            ? InternshipStatus.OPEN
+            : request.status();
+
+        if (
+            requestedStatus == InternshipStatus.OPEN &&
+            request.applicationDeadline().isBefore(LocalDate.now())
+        ) {
+            return ResponseEntity.badRequest().body(
+                Map.of("message", "An open offer cannot have a deadline in the past.")
+            );
         }
 
 
@@ -121,6 +240,8 @@ public class AdminInternshipOfferController {
             internshipOfferRepository
                 .save(offer);
 
+        auditService.record(authentication, servletRequest, "OFFER_CREATED", "INTERNSHIP_OFFER", saved.getId(), saved.getTitleEn());
+
 
         return ResponseEntity.ok(
             saved
@@ -135,7 +256,9 @@ public class AdminInternshipOfferController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateOffer(
         @PathVariable Long id,
-        @RequestBody InternshipOfferRequest request
+        @RequestBody InternshipOfferRequest request,
+        Authentication authentication,
+        HttpServletRequest servletRequest
     ) {
 
         String validationError =
@@ -157,7 +280,7 @@ public class AdminInternshipOfferController {
 
         InternshipOffer offer =
             internshipOfferRepository
-                .findById(id)
+                .findByIdAndArchivedFalse(id)
                 .orElse(null);
 
 
@@ -166,6 +289,41 @@ public class AdminInternshipOfferController {
             return ResponseEntity
                 .notFound()
                 .build();
+        }
+
+        int currentCandidates = offer.getCurrentCandidates() == null
+            ? 0
+            : offer.getCurrentCandidates();
+
+        if (request.maxCandidates() < currentCandidates) {
+            return ResponseEntity.badRequest().body(
+                Map.of(
+                    "message",
+                    "Maximum candidates cannot be lower than the current applicant count."
+                )
+            );
+        }
+
+        InternshipStatus resultingStatus = request.status() == null
+            ? offer.getStatus()
+            : request.status();
+
+        if (
+            resultingStatus == InternshipStatus.OPEN &&
+            request.applicationDeadline().isBefore(LocalDate.now())
+        ) {
+            return ResponseEntity.badRequest().body(
+                Map.of("message", "An open offer cannot have a deadline in the past.")
+            );
+        }
+
+        if (
+            resultingStatus == InternshipStatus.OPEN &&
+            currentCandidates >= request.maxCandidates()
+        ) {
+            return ResponseEntity.badRequest().body(
+                Map.of("message", "A full offer cannot remain open.")
+            );
         }
 
 
@@ -187,6 +345,8 @@ public class AdminInternshipOfferController {
             internshipOfferRepository
                 .save(offer);
 
+        auditService.record(authentication, servletRequest, "OFFER_EDITED", "INTERNSHIP_OFFER", id, saved.getTitleEn());
+
 
         return ResponseEntity.ok(
             saved
@@ -201,12 +361,14 @@ public class AdminInternshipOfferController {
     @PatchMapping("/{id}/status")
     public ResponseEntity<?> changeStatus(
         @PathVariable Long id,
-        @RequestBody Map<String, String> body
+        @RequestBody Map<String, String> body,
+        Authentication authentication,
+        HttpServletRequest servletRequest
     ) {
 
         InternshipOffer offer =
             internshipOfferRepository
-                .findById(id)
+                .findByIdAndArchivedFalse(id)
                 .orElse(null);
 
 
@@ -281,6 +443,21 @@ public class AdminInternshipOfferController {
                 );
         }
 
+        if (
+            status == InternshipStatus.OPEN &&
+            offer.getApplicationDeadline() != null &&
+            offer.getApplicationDeadline().isBefore(LocalDate.now())
+        ) {
+            return ResponseEntity.badRequest().body(
+                Map.of(
+                    "message",
+                    "This offer cannot be reopened because its application deadline has passed."
+                )
+            );
+        }
+
+
+        InternshipStatus previousStatus = offer.getStatus();
 
         offer.setStatus(
             status
@@ -290,6 +467,15 @@ public class AdminInternshipOfferController {
         InternshipOffer saved =
             internshipOfferRepository
                 .save(offer);
+
+        auditService.record(
+            authentication,
+            servletRequest,
+            "OFFER_STATUS_CHANGED",
+            "INTERNSHIP_OFFER",
+            id,
+            previousStatus + " -> " + status
+        );
 
 
         return ResponseEntity.ok(

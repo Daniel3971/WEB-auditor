@@ -10,7 +10,7 @@ import { InternshipOffer } from '../models/internship-offer';
 export class InternshipOfferService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/internship-offers';
+    '/api/internship-offers';
 
   constructor(private http: HttpClient) {}
 

@@ -73,21 +73,30 @@
         </p>
 
         <h1>
-          Internship Offers
+          {{ viewingArchived() ? 'Archived Offers' : 'Internship Offers' }}
         </h1>
 
         <p>
-          Manage all internship opportunities published on the website.
+          @if (viewingArchived()) {
+            Restore previously removed internship offers.
+          } @else {
+            Manage all internship opportunities published on the website.
+          }
         </p>
       </div>
 
-
-      <a
-        routerLink="/admin/offers/new"
-        class="create-button"
-      >
-        + Create Offer
-      </a>
+      <div class="header-actions">
+        @if (viewingArchived()) {
+          <button type="button" class="archive-button" (click)="showActiveOffers()">
+            Active Offers
+          </button>
+        } @else {
+          <button type="button" class="archive-button" (click)="showArchivedOffers()">
+            Archived Offers
+          </button>
+          <a routerLink="/admin/offers/new" class="create-button">+ Create Offer</a>
+        }
+      </div>
 
     </header>
 
@@ -217,6 +226,24 @@
 
             <div class="row-actions">
 
+  @if (viewingArchived()) {
+    <button
+      type="button"
+      class="restore-button"
+      (click)="restoreOffer(offer)"
+    >
+      Restore
+    </button>
+
+    <button
+      type="button"
+      class="permanent-delete-button"
+      (click)="permanentlyDeleteOffer(offer)"
+    >
+      Delete Permanently
+    </button>
+  } @else {
+
   <a
     [routerLink]="[
       '/admin/offers',
@@ -239,6 +266,16 @@
       Reopen
     }
   </button>
+
+  <button
+    type="button"
+    class="remove-button"
+    (click)="removeOffer(offer)"
+  >
+    Remove
+  </button>
+
+  }
 
 </div>
 

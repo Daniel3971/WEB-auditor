@@ -20,6 +20,7 @@ import {
 import {
   InternshipOfferService
 } from '../../services/internship-offer.service';
+import { AdminInternshipApplicationService } from '../../services/admin-internship-application.service';
 
 
 @Component({
@@ -56,6 +57,9 @@ export class AdminDashboard
   closedOffers =
     signal(0);
 
+  totalApplications =
+    signal(0);
+
 
   constructor(
     private adminAuthService:
@@ -63,6 +67,9 @@ export class AdminDashboard
 
     private internshipOfferService:
       InternshipOfferService,
+
+    private applicationService:
+      AdminInternshipApplicationService,
 
     private router:
       Router
@@ -74,6 +81,20 @@ export class AdminDashboard
     this.loadAdmin();
 
     this.loadOfferStatistics();
+
+    this.loadApplicationStatistics();
+  }
+
+
+  loadApplicationStatistics(): void {
+    this.applicationService
+      .getApplicationCount()
+      .subscribe({
+        next: response =>
+          this.totalApplications.set(response.count),
+        error: error =>
+          console.error('Could not load applications:', error)
+      });
   }
 
 

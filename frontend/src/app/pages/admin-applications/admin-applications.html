@@ -1,0 +1,132 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <img src="/logo_Atwi.png" alt="ATWI">
+      <div><strong>ATWI</strong><span>Administration</span></div>
+    </div>
+
+    <nav class="sidebar-navigation">
+      <a routerLink="/admin/dashboard">Dashboard</a>
+      <div class="navigation-label">INTERNSHIPS</div>
+      <a routerLink="/admin/offers">Internship Offers</a>
+      <a routerLink="/admin/offers/new">+ Create Offer</a>
+      <div class="navigation-label">APPLICATIONS</div>
+      <a routerLink="/admin/applications" class="active">Applications</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button type="button" (click)="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">RECRUITMENT</p>
+        <h1>Applications</h1>
+        <p>Review candidates who applied for ATWI internship opportunities.</p>
+      </div>
+      <div class="application-count">
+        <strong>{{ filteredApplications.length }}</strong>
+        <span>{{ filteredApplications.length === 1 ? 'application' : 'applications' }}</span>
+      </div>
+    </header>
+
+    <section class="applications-toolbar" aria-label="Application filters">
+      <label class="search-field">
+        <span>Search</span>
+        <input type="search" placeholder="Name, email, phone, university..."
+          [value]="searchTerm()" (input)="updateSearch($event)">
+      </label>
+
+      <label>
+        <span>Internship</span>
+        <select [value]="offerFilter()" (change)="updateOfferFilter($event)">
+          <option value="ALL">All internships</option>
+          @for (offer of offerOptions; track offer.id) {
+            <option [value]="offer.id">{{ offer.title }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        <span>Status</span>
+        <select [value]="statusFilter()" (change)="updateStatusFilter($event)">
+          <option value="ALL">All statuses</option>
+          <option value="PENDING">Pending</option>
+          <option value="REVIEWED">Reviewed</option>
+          <option value="ACCEPTED">Accepted</option>
+          <option value="REJECTED">Rejected</option>
+        </select>
+      </label>
+
+      <button type="button" class="clear-button" (click)="clearFilters()">Clear filters</button>
+    </section>
+
+    @if (errorMessage()) {
+      <div class="error-message" role="alert">
+        <span>{{ errorMessage() }}</span>
+        <button type="button" (click)="loadApplications()">Try again</button>
+      </div>
+    }
+
+    @if (loading()) {
+      <div class="state-card">Loading applications...</div>
+    } @else {
+      <div class="applications-table">
+        <div class="table-header">
+          <span>Candidate</span><span>Internship</span><span>University / Major</span>
+          <span>Applied</span><span>Status</span><span>Action</span>
+        </div>
+
+        @for (application of filteredApplications; track application.id) {
+          <article class="application-row">
+            <div class="candidate-cell">
+              <div class="candidate-avatar">
+                {{ application.firstName.charAt(0) }}{{ application.lastName.charAt(0) }}
+              </div>
+              <div>
+                <strong>{{ application.firstName }} {{ application.lastName }}</strong>
+                <a [href]="'mailto:' + application.email">{{ application.email }}</a>
+                <span>{{ application.phone }}</span>
+              </div>
+            </div>
+
+            <div class="offer-cell">
+              <strong>{{ application.offerTitleEn }}</strong>
+              <span>{{ application.offerTitleAr }}</span>
+            </div>
+
+            <div class="education-cell">
+              <strong>{{ application.university || 'Not provided' }}</strong>
+              <span>{{ application.major || 'Major not provided' }}</span>
+            </div>
+
+            <time [attr.datetime]="application.createdAt">
+              {{ application.createdAt | date:'dd MMM yyyy' }}
+              <span>{{ application.createdAt | date:'h:mm a' }}</span>
+            </time>
+
+            <span class="status-badge"
+              [class.pending]="application.applicationStatus === 'PENDING'"
+              [class.reviewed]="application.applicationStatus === 'REVIEWED'"
+              [class.accepted]="application.applicationStatus === 'ACCEPTED'"
+              [class.rejected]="application.applicationStatus === 'REJECTED'">
+              {{ application.applicationStatus }}
+            </span>
+
+            <a class="review-button" [routerLink]="['/admin/applications', application.id]">
+              Review
+            </a>
+          </article>
+        } @empty {
+          <div class="empty-state">
+            <strong>No applications found</strong>
+            <p>Try changing or clearing the current filters.</p>
+            <button type="button" (click)="clearFilters()">Clear filters</button>
+          </div>
+        }
+      </div>
+    }
+  </main>
+</div>

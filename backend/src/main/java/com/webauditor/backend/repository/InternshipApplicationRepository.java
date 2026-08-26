@@ -34,4 +34,6 @@ public interface InternshipApplicationRepository
         Long internshipOfferId,
         String email
     );
+
+    long countByInternshipOfferId(Long internshipOfferId);
 }

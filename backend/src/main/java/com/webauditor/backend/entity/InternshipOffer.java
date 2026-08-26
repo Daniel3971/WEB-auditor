@@ -53,6 +53,9 @@ public class InternshipOffer {
     @Column(nullable = false)
     private InternshipStatus status = InternshipStatus.OPEN;
 
+    @Column(nullable = false)
+    private boolean archived = false;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -205,6 +208,14 @@ public class InternshipOffer {
 
     public void setStatus(InternshipStatus status) {
         this.status = status;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 
     public LocalDateTime getCreatedAt() {

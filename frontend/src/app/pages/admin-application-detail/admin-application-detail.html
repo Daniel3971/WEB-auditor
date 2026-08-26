@@ -1,0 +1,86 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <img src="/logo_Atwi.png" alt="ATWI">
+      <div><strong>ATWI</strong><span>Administration</span></div>
+    </div>
+    <nav class="sidebar-navigation">
+      <a routerLink="/admin/dashboard">Dashboard</a>
+      <div class="navigation-label">INTERNSHIPS</div>
+      <a routerLink="/admin/offers">Internship Offers</a>
+      <a routerLink="/admin/offers/new">+ Create Offer</a>
+      <div class="navigation-label">APPLICATIONS</div>
+      <a routerLink="/admin/applications" class="active">Applications</a>
+    </nav>
+    <div class="sidebar-bottom"><button type="button" (click)="logout()">Logout</button></div>
+  </aside>
+
+  <main class="admin-main">
+    <a routerLink="/admin/applications" class="back-link">← Back to applications</a>
+
+    @if (errorMessage()) { <div class="message error" role="alert">{{ errorMessage() }}</div> }
+    @if (successMessage()) { <div class="message success" role="status">{{ successMessage() }}</div> }
+
+    @if (loading()) {
+      <div class="state-card">Loading candidate details...</div>
+    } @else if (application(); as candidate) {
+      <header class="candidate-header">
+        <div class="identity">
+          <div class="avatar">{{ candidate.firstName.charAt(0) }}{{ candidate.lastName.charAt(0) }}</div>
+          <div>
+            <p class="eyebrow">APPLICATION #{{ candidate.id }}</p>
+            <h1>{{ candidate.firstName }} {{ candidate.lastName }}</h1>
+            <p>Applied {{ candidate.createdAt | date:'dd MMMM yyyy, h:mm a' }}</p>
+          </div>
+        </div>
+
+        <label class="status-control">
+          <span>Application status</span>
+          <select [value]="candidate.applicationStatus" (change)="changeStatus($event)" [disabled]="savingStatus()">
+            <option value="PENDING">Pending</option>
+            <option value="REVIEWED">Reviewed</option>
+            <option value="ACCEPTED">Accepted</option>
+            <option value="REJECTED">Rejected</option>
+          </select>
+          @if (savingStatus()) { <small>Saving status...</small> }
+        </label>
+      </header>
+
+      <div class="detail-grid">
+        <section class="detail-card">
+          <div class="card-heading"><p>CONTACT</p><h2>Candidate information</h2></div>
+          <dl>
+            <div><dt>Email</dt><dd><a [href]="'mailto:' + candidate.email">{{ candidate.email }}</a></dd></div>
+            <div><dt>Phone</dt><dd><a [href]="'tel:' + candidate.phone">{{ candidate.phone }}</a></dd></div>
+            <div><dt>University</dt><dd>{{ candidate.university || 'Not provided' }}</dd></div>
+            <div><dt>Major / Degree</dt><dd>{{ candidate.major || 'Not provided' }}</dd></div>
+          </dl>
+        </section>
+
+        <section class="detail-card internship-card">
+          <div class="card-heading"><p>INTERNSHIP</p><h2>Applied position</h2></div>
+          <strong>{{ candidate.offerTitleEn }}</strong>
+          <span dir="rtl">{{ candidate.offerTitleAr }}</span>
+        </section>
+
+        <section class="detail-card message-card">
+          <div class="card-heading"><p>CANDIDATE MESSAGE</p><h2>Application message</h2></div>
+          <p class="candidate-message">{{ candidate.message || 'The candidate did not include a message.' }}</p>
+        </section>
+
+        <section class="detail-card cv-card">
+          <div>
+            <div class="card-heading"><p>DOCUMENT</p><h2>Curriculum vitae</h2></div>
+            <span class="file-name">{{ candidate.cvFileName }}</span>
+          </div>
+          <div class="cv-actions">
+            <button type="button" class="secondary" (click)="openCv()" [disabled]="downloadingCv()">Open CV</button>
+            <button type="button" class="primary" (click)="downloadCv()" [disabled]="downloadingCv()">
+              {{ downloadingCv() ? 'Loading...' : 'Download CV' }}
+            </button>
+          </div>
+        </section>
+      </div>
+    }
+  </main>
+</div>

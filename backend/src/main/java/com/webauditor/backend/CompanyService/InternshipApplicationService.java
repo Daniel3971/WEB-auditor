@@ -7,12 +7,18 @@ import com.webauditor.backend.entity.InternshipStatus;
 
 import com.webauditor.backend.repository.InternshipApplicationRepository;
 import com.webauditor.backend.repository.InternshipOfferRepository;
+import com.webauditor.backend.dto.AdminApplicationResponse;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.data.domain.Sort;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,6 +26,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import java.util.UUID;
+import java.util.List;
 
 @Service
 public class InternshipApplicationService {
@@ -38,16 +45,13 @@ public class InternshipApplicationService {
      *   uploads/
      *     cvs/
      */
-    private final Path uploadDirectory =
-        Paths.get(
-            "uploads",
-            "cvs"
-        );
+    private final Path uploadDirectory;
 
 
     public InternshipApplicationService(
         InternshipApplicationRepository applicationRepository,
-        InternshipOfferRepository offerRepository
+        InternshipOfferRepository offerRepository,
+        @Value("${app.storage.cv-directory:uploads/cvs}") String cvDirectory
     ) {
 
         this.applicationRepository =
@@ -55,6 +59,10 @@ public class InternshipApplicationService {
 
         this.offerRepository =
             offerRepository;
+
+        this.uploadDirectory = Paths.get(cvDirectory)
+            .toAbsolutePath()
+            .normalize();
     }
 
 
@@ -82,7 +90,7 @@ public class InternshipApplicationService {
 
         InternshipOffer offer =
             offerRepository
-                .findById(offerId)
+                .findActiveByIdForUpdate(offerId)
                 .orElseThrow(
                     () ->
                         new IllegalArgumentException(
@@ -102,6 +110,18 @@ public class InternshipApplicationService {
 
             throw new IllegalStateException(
                 "This internship offer is closed."
+            );
+        }
+
+        if (
+            offer.getApplicationDeadline() != null &&
+            offer.getApplicationDeadline().isBefore(LocalDate.now())
+        ) {
+            offer.setStatus(InternshipStatus.CLOSED);
+            offerRepository.save(offer);
+
+            throw new IllegalStateException(
+                "The application deadline for this internship has passed."
             );
         }
 
@@ -232,7 +252,7 @@ public class InternshipApplicationService {
         ====================================== */
 
         String originalFileName =
-            cv.getOriginalFilename();
+            safeOriginalFileName(cv.getOriginalFilename());
 
 
         String storedFileName =
@@ -370,6 +390,96 @@ public class InternshipApplicationService {
 
         return savedApplication;
     }
+
+    @Transactional(readOnly = true)
+    public List<AdminApplicationResponse> getAllForAdmin() {
+        return applicationRepository.findAll(
+                Sort.by(Sort.Direction.DESC, "createdAt")
+            )
+            .stream()
+            .map(AdminApplicationResponse::from)
+            .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public long countForAdmin() {
+        return applicationRepository.count();
+    }
+
+    @Transactional
+    public AdminApplicationResponse updateStatusForAdmin(
+        Long id,
+        ApplicationStatus status
+    ) {
+        if (status == null) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Application status is required."
+            );
+        }
+
+        InternshipApplication application = findApplication(id);
+        application.setApplicationStatus(status);
+        return AdminApplicationResponse.from(
+            applicationRepository.save(application)
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public AdminApplicationResponse getForAdmin(Long id) {
+        return AdminApplicationResponse.from(findApplication(id));
+    }
+
+    @Transactional(readOnly = true)
+    public List<AdminApplicationResponse> getByOfferForAdmin(Long offerId) {
+        return applicationRepository.findByInternshipOfferId(offerId)
+            .stream()
+            .map(AdminApplicationResponse::from)
+            .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public StoredCv getCvForAdmin(Long id) {
+        InternshipApplication application = findApplication(id);
+        Path storedPath = Paths.get(application.getCvFilePath())
+            .toAbsolutePath()
+            .normalize();
+
+        if (!storedPath.startsWith(uploadDirectory)) {
+            throw new IllegalStateException("Invalid CV storage path.");
+        }
+
+        if (!Files.isRegularFile(storedPath) || !Files.isReadable(storedPath)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "CV file is unavailable."
+            );
+        }
+
+        try {
+            return new StoredCv(
+                storedPath,
+                safeOriginalFileName(application.getCvFileName()),
+                Files.size(storedPath)
+            );
+        } catch (IOException exception) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "CV file is unavailable.",
+                exception
+            );
+        }
+    }
+
+    private InternshipApplication findApplication(Long id) {
+        return applicationRepository.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Application not found."
+            ));
+    }
+
+    public record StoredCv(Path path, String originalFileName, long size) {}
 
 
     /* =========================================
@@ -557,7 +667,7 @@ public class InternshipApplicationService {
 
     private void validateCv(
         MultipartFile cv
-    ) {
+    ) throws IOException {
 
 
         if (
@@ -626,6 +736,35 @@ public class InternshipApplicationService {
                 "CV must be smaller than 5 MB."
             );
         }
+
+        byte[] signature = new byte[5];
+        try (var input = cv.getInputStream()) {
+            if (input.read(signature) != signature.length ||
+                signature[0] != '%' || signature[1] != 'P' ||
+                signature[2] != 'D' || signature[3] != 'F' ||
+                signature[4] != '-') {
+                throw new IllegalArgumentException("The uploaded file is not a valid PDF.");
+            }
+        }
+    }
+
+    private String safeOriginalFileName(String fileName) {
+        if (fileName == null || fileName.isBlank()) {
+            return "cv.pdf";
+        }
+
+        String normalized = fileName.replace('\\', '/');
+        String baseName = normalized.substring(normalized.lastIndexOf('/') + 1)
+            .replaceAll("[\\r\\n\\\"]", "_")
+            .trim();
+
+        if (baseName.isBlank()) {
+            return "cv.pdf";
+        }
+
+        return baseName.length() > 200
+            ? baseName.substring(baseName.length() - 200)
+            : baseName;
     }
 
 

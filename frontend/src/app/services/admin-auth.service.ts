@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs';
 
 
 export interface AdminLoginRequest {
@@ -22,7 +23,7 @@ export interface AdminUser {
 export class AdminAuthService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/auth';
+    '/api/auth';
 
 
   constructor(
@@ -45,12 +46,21 @@ export class AdminAuthService {
     };
 
 
-    return this.http.post<AdminUser>(
-      `${this.apiUrl}/login`,
-      body,
-      {
-        withCredentials: true
-      }
+    return this.initializeCsrf().pipe(
+      switchMap(() =>
+        this.http.post<AdminUser>(
+          `${this.apiUrl}/login`,
+          body,
+          { withCredentials: true }
+        )
+      )
+    );
+  }
+
+  initializeCsrf(): Observable<{ token: string; headerName: string }> {
+    return this.http.get<{ token: string; headerName: string }>(
+      `${this.apiUrl}/csrf`,
+      { withCredentials: true }
     );
   }
 

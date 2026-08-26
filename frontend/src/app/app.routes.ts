@@ -14,6 +14,8 @@ import { adminAuthGuard } from './guards/admin-auth.guard';
 import {AdminCreateOffer} from './pages/admin-create-offer/admin-create-offer';
 import {AdminOffers} from './pages/admin-offers/admin-offers';
 import {AdminEditOffer} from './pages/admin-edit-offer/admin-edit-offer';
+import { AdminApplications } from './pages/admin-applications/admin-applications';
+import { AdminApplicationDetail } from './pages/admin-application-detail/admin-application-detail';
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'about', component: About },
@@ -29,5 +31,7 @@ export const routes: Routes = [
   {path: 'admin/offers',component: AdminOffers,canActivate: [adminAuthGuard]},
   {path: 'admin/offers/new',component: AdminCreateOffer,canActivate: [adminAuthGuard]},
   {path: 'admin/offers/:id/edit',component: AdminEditOffer,canActivate: [adminAuthGuard]},
+  {path: 'admin/applications',component: AdminApplications,canActivate: [adminAuthGuard]},
+  {path: 'admin/applications/:id',component: AdminApplicationDetail,canActivate: [adminAuthGuard]},
   { path: '**', redirectTo: '' }
 ];

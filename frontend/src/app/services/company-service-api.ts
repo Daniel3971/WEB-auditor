@@ -8,7 +8,7 @@ import { CompanyService } from '../models/company-service';
   providedIn: 'root'
 })
 export class CompanyServiceApi {
-  private readonly apiUrl = 'http://localhost:8080/api/services';
+  private readonly apiUrl = '/api/services';
 
   constructor(private http: HttpClient) {}
 
