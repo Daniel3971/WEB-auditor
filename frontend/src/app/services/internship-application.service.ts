@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +9,16 @@ import { Observable } from 'rxjs';
 export class InternshipApplicationService {
 
   private readonly apiUrl =
-    '/api/internship-applications';
+    `${environment.apiUrl}/api/internship-applications`;
 
   constructor(
     private http: HttpClient
   ) {}
 
   getTurnstileConfig(): Observable<TurnstileConfig> {
-    return this.http.get<TurnstileConfig>('/api/turnstile/config');
+    return this.http.get<TurnstileConfig>(
+      `${environment.apiUrl}/api/turnstile/config`
+    );
   }
 
   submitApplication(

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs';
+import { tap } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { CsrfTokenService } from './csrf-token.service';
 
 
 export interface AdminLoginRequest {
@@ -23,11 +26,12 @@ export interface AdminUser {
 export class AdminAuthService {
 
   private readonly apiUrl =
-    '/api/auth';
+    `${environment.apiUrl}/api/auth`;
 
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private csrfTokenService: CsrfTokenService
   ) {}
 
 
@@ -61,6 +65,8 @@ export class AdminAuthService {
     return this.http.get<{ token: string; headerName: string }>(
       `${this.apiUrl}/csrf`,
       { withCredentials: true }
+    ).pipe(
+      tap(response => this.csrfTokenService.setToken(response.token))
     );
   }
 
@@ -94,6 +100,8 @@ export class AdminAuthService {
       {
         withCredentials: true
       }
+    ).pipe(
+      tap(() => this.csrfTokenService.clearToken())
     );
   }
 }

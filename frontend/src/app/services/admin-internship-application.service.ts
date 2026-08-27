@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AdminInternshipApplication, ApplicationStatus } from '../models/admin-internship-application';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AdminInternshipApplicationService {
   private readonly apiUrl =
-    '/api/admin/internship-applications';
+    `${environment.apiUrl}/api/admin/internship-applications`;
 
   constructor(private http: HttpClient) {}
 

@@ -13,6 +13,7 @@ import {
 import {
   InternshipOffer
 } from '../models/internship-offer';
+import { environment } from '../../environments/environment';
 
 
 export interface AdminInternshipOfferRequest {
@@ -49,7 +50,7 @@ export interface AdminInternshipOfferRequest {
 export class AdminInternshipOfferService {
 
   private readonly apiUrl =
-    '/api/admin/internship-offers';
+    `${environment.apiUrl}/api/admin/internship-offers`;
 
 
   constructor(

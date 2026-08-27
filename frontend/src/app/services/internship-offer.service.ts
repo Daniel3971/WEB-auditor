@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { InternshipOffer } from '../models/internship-offer';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { InternshipOffer } from '../models/internship-offer';
 export class InternshipOfferService {
 
   private readonly apiUrl =
-    '/api/internship-offers';
+    `${environment.apiUrl}/api/internship-offers`;
 
   constructor(private http: HttpClient) {}
 

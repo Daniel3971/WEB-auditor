@@ -1,16 +1,21 @@
+import { inject } from '@angular/core';
 import { HttpInterceptorFn } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { CsrfTokenService } from '../services/csrf-token.service';
 
 const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);
 
 export const csrfInterceptor: HttpInterceptorFn = (request, next) => {
+  const csrfTokenService = inject(CsrfTokenService);
+
   if (
     SAFE_METHODS.has(request.method.toUpperCase()) ||
-    !request.url.startsWith('/api/')
+    !request.url.startsWith(`${environment.apiUrl}/api/`)
   ) {
     return next(request);
   }
 
-  const token = readCookie('XSRF-TOKEN');
+  const token = csrfTokenService.getToken() ?? readCookie('XSRF-TOKEN');
 
   if (!token) {
     return next(request);

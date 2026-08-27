@@ -46,6 +46,9 @@ public class SecurityConfig {
     @Value("${app.security.frontend-origin:http://localhost:4200}")
     private String frontendOrigin;
 
+    @Value("${app.security.cookie-same-site:Lax}")
+    private String cookieSameSite;
+
 
     /* =========================
        PASSWORD ENCODER
@@ -239,7 +242,7 @@ public class SecurityConfig {
 
         repository.setCookieCustomizer(cookie -> cookie
             .path("/")
-            .sameSite("Lax")
+            .sameSite(cookieSameSite)
             .secure(secureCookie)
         );
 
