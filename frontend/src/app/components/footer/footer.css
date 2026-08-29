@@ -2,6 +2,10 @@
   display: block;
 }
 
+#contact {
+  scroll-margin-top: 130px;
+}
+
 .footer {
   color: #ffffff;
   background: #0b2748;

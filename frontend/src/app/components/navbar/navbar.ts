@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   RouterLink,
   RouterLinkActive
@@ -18,7 +18,17 @@ import { LanguageService } from '../../services/language.service';
   styleUrl: './navbar.css'
 })
 export class Navbar {
+  readonly menuOpen = signal(false);
+
   constructor(
     public language: LanguageService
   ) {}
+
+  toggleMenu(): void {
+    this.menuOpen.update((isOpen) => !isOpen);
+  }
+
+  closeMenu(): void {
+    this.menuOpen.set(false);
+  }
 }

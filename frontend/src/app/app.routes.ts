@@ -6,7 +6,6 @@ import { Services } from './pages/services/services';
 import { Locations } from './pages/locations/locations';
 import { OfficialForms } from './pages/official-forms/official-forms';
 import { Careers } from './pages/careers/careers';
-import { Contact } from './pages/contact/contact';
 import { InternshipOffers } from './pages/internship-offers/internship-offers';
 import { AdminLogin } from './pages/admin-login/admin-login';
 import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
@@ -23,7 +22,6 @@ export const routes: Routes = [
   { path: 'locations', component: Locations },
   { path: 'official-forms', component: OfficialForms },
   { path: 'careers', component: Careers },
-  { path: 'contact', component: Contact },
   {path: 'admin/login',component: AdminLogin},
   {path: 'admin/dashboard',component: AdminDashboard,canActivate: [adminAuthGuard]},
 

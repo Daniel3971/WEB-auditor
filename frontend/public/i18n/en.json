@@ -6,7 +6,9 @@
     "LOCATIONS": "Locations",
     "OFFICIAL_FORMS": "Official Forms",
     "CAREERS": "Careers",
-    "CONTACT": "Contact"
+    "CONTACT": "Contact",
+    "OPEN_MENU": "Open navigation menu",
+    "CLOSE_MENU": "Close navigation menu"
   },
 
   "HOME": {

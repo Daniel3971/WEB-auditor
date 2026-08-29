@@ -9,35 +9,50 @@
     </a>
   </div>
 
-  <nav class="navbar">
+  <nav id="main-navigation" class="navbar" [class.is-open]="menuOpen()">
     <a
       routerLink="/"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
+      (click)="closeMenu()"
     >
       {{ 'NAV.HOME' | translate }}
     </a>
 
-    <a routerLink="/about" routerLinkActive="active">
+    <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">
       {{ 'NAV.ABOUT' | translate }}
     </a>
 
-    <a routerLink="/services" routerLinkActive="active">
+    <a routerLink="/services" routerLinkActive="active" (click)="closeMenu()">
       {{ 'NAV.SERVICES' | translate }}
     </a>
 
-    <a routerLink="/locations" routerLinkActive="active">
+    <a routerLink="/locations" routerLinkActive="active" (click)="closeMenu()">
       {{ 'NAV.LOCATIONS' | translate }}
     </a>
 
-    <a routerLink="/official-forms" routerLinkActive="active">
+    <a routerLink="/official-forms" routerLinkActive="active" (click)="closeMenu()">
       {{ 'NAV.OFFICIAL_FORMS' | translate }}
     </a>
 
-    <a routerLink="/careers" routerLinkActive="active">
+    <a routerLink="/careers" routerLinkActive="active" (click)="closeMenu()">
       {{ 'NAV.CAREERS' | translate }}
     </a>
   </nav>
+
+  <button
+    type="button"
+    class="menu-toggle"
+    [class.is-open]="menuOpen()"
+    [attr.aria-expanded]="menuOpen()"
+    aria-controls="main-navigation"
+    [attr.aria-label]="(menuOpen() ? 'NAV.CLOSE_MENU' : 'NAV.OPEN_MENU') | translate"
+    (click)="toggleMenu()"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
   <div
     class="language-switcher"
