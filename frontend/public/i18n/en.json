@@ -367,8 +367,12 @@
   "STATUS": "Status"
 },
 "EMPTY": {
-  "TITLE": "No internship opportunities found",
-  "DESCRIPTION": "There are currently no opportunities matching your search."
+  "TITLE": "No internship opportunities are available right now",
+  "DESCRIPTION": "Please check back soon. New internship opportunities are added regularly."
+},
+"NO_RESULTS": {
+  "TITLE": "No matching opportunities found",
+  "DESCRIPTION": "Try changing your search or status filter."
 },
 "FOOTER": {
   "TITLE": "Don't find the right opportunity?",

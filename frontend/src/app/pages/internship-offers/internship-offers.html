@@ -156,13 +156,13 @@
 
       @empty {
         <div class="no-offers">
-          <h3>
-            {{ 'INTERNSHIP_OFFERS.EMPTY.TITLE' | translate }}
-          </h3>
-
-          <p>
-            {{ 'INTERNSHIP_OFFERS.EMPTY.DESCRIPTION' | translate }}
-          </p>
+          @if (offers().length === 0) {
+            <h3>{{ 'INTERNSHIP_OFFERS.EMPTY.TITLE' | translate }}</h3>
+            <p>{{ 'INTERNSHIP_OFFERS.EMPTY.DESCRIPTION' | translate }}</p>
+          } @else {
+            <h3>{{ 'INTERNSHIP_OFFERS.NO_RESULTS.TITLE' | translate }}</h3>
+            <p>{{ 'INTERNSHIP_OFFERS.NO_RESULTS.DESCRIPTION' | translate }}</p>
+          }
         </div>
       }
 
