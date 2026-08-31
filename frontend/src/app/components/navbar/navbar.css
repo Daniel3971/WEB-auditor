@@ -126,22 +126,32 @@
 
 @media (max-width: 850px) {
   .header {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
     gap: 12px;
     padding-top: 10px;
     padding-bottom: 10px;
   }
 
   .brand {
-    margin-right: auto;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    justify-self: center;
   }
 
   .language-switcher {
+    grid-column: 3;
+    grid-row: 1;
     margin: 0;
+    justify-self: end;
   }
 
   .navbar {
-    order: 4;
+    grid-column: 1 / -1;
+    grid-row: 2;
     display: none;
     width: 100%;
     align-items: stretch;
@@ -169,6 +179,9 @@
   }
 
   .menu-toggle {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
     width: 40px;
     height: 38px;
     padding: 9px;
